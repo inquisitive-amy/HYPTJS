@@ -5,6 +5,15 @@
 	<title>Local Storage</title>
 </head>
 <body>
-	
+	<script>
+		var name = localStorage.getItem('first');
+		// Check if there is a saved name first, if not
+		// ask for it and save it in local storage
+		if(name == null){
+			name = prompt('What is your name?');
+			localStorage.setItem('first', name);
+		}
+		console.log(name);
+	</script>
 </body>
 </html>

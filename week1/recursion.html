@@ -6,9 +6,25 @@
 </head>
 <body>
 <script>
-	function getLotto() {
+var numbers = [];
+function genLotto() {
+	// 1. Genereate random number between 1 /49 inclusive
 
+	var num = Math.ceil(Math.random() * 49);
+	console.log(num)
+
+	// 2. If the number hasn't yet been generated, put it in the array
+	if(!numbers.includes(num)){
+		// do no nothing
+		numbers.push(num);
 	}
+
+	// 3. If there is not enough numbers, stop
+	if(numbers.length < 6){
+		genLotto();
+	}
+
+}	
 </script>
 </body>
 </html>

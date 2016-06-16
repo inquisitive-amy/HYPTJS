@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="time"><p>HOURS: MIN: SEC:</p></div>
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+  <style>
+    html {
+      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background-size:cover;
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border:20px solid white;
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      box-shadow:
+        0 0 0px 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width:50%;
+      height:6px;
+      background:black;
+      position: absolute;
+      top:50%;
+      transform-origin:100%; /* this puts the pivot point all the way to the right of the hand */
+      transition:transform 0.1s cubic-bezier(0.64, 2.24, 0.58, 1);
+      box-shadow:0 0 0 4px rgba(0,0,0,0.05);
+    }
+
+    .hand.hour-hand{
+      transform-origin: 100%;
+      transform: rotate(10deg);
+    }
+
+    .min-hand{
+      display: none;
+    }
+
+    .hand.second-hand{
+      rotate: 90deg;
+    }
+
+ /*   .hand.second-hand {
+      animation: moveHand 1s infinite;
+      transform:rotate(90deg);
+    }*/
+
+    /* Standard syntax */ 
+/*    @keyframes moveHand {
+      from {
+        transform : rotate(0deg);
+      }
+      to{
+        transform:rotate(360deg);
+      }
+    }*/
+
+    .time{
+      color: white;
+    }
+
+  </style>
+
+  <script>
+
+    // Make a clock with hour/min/second hands
+    // find the current time and figure out how many degrees to rotate() the hand with CSS
+    // This will require:
+    // JavaScript Date
+    // CSS Transforms
+    // CSS transform-origin to offset the "pivot point" of the clock's hands
+
+    // EXAMPLE: http://wes.io/dpjN
+    // http://momentjs.com/
+
+
+    // Get the date so we can tell the hour, min, seconds 
+    // for when the page loads
+
+    // var half;
+
+    // if(hour > 12){
+    //   half = 'PM';
+    // }
+    // else{
+    //   half = 'AM';
+    // }
+
+    // console.log(half);
+
+    // $('.second-hand').addClass('found');
+
+
+    window.setInterval(function(){
+
+      var d = new Date();
+      var hour = d.getHours();
+      var minute = d.getMinutes();
+      var second = d.getSeconds();
+
+      hour = hour % 12;
+      hour = hour ? hour : 12;
+      // var hourDegree;
+      // hourDegree = (hour/180)*100;
+
+      function toRadians(angle){
+        return angle * (Math.PI/360);
+      }
+
+      var hourDegree = toRadians(hour);
+
+      hourDegreeWhole = Math.round(hourDegree);
+
+      jQuery('.hour-hand').css('transform' ,'rotate('+ hourDegreeWhole +'deg)');
+
+      jQuery('.second-hand').css('transform' ,'rotate('+ second +'deg)');
+
+
+      jQuery('.time p').html('HOURS:' + hour + ' MIN:' + minute + ' SECOND:' + second);
+
+    }, 1000);
+
+
+
+
+  </script>
+</body>
+</html>
+

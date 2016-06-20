@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoicing System</title>
+</head>
+<body>
+  <div class="invoice">
+    <a href="#" class="addItem">Add Item</a>
+    <ol class="invoiceItems">
+      
+    </ol>
+    <div class="totals">
+      <p class="subTotal">Sub Total: $<span>0</span></p>
+      <p class="hst">HST: $<span>0</span></p>
+      <p class="grandTotal">Grand Total: $<span>0</span></p>
+    </div>
+  </div>
+
+  <!-- A blank item we will copy -->
+  <div class="blankItem">
+    <li class="item">
+      <input type="text" name="desc" placeholder="Item Description">
+      <input type="number" name="value" placeholder="Item Value">
+    </li>
+  </div>
+
+  <style>
+    html {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .blankItem  {
+      display: none;
+    }
+
+    .invoice {
+      width:500px;
+      margin: 0 auto;
+    }
+    ol.invoiceItems {
+      border-right: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      margin: 0;
+      padding: 0;
+    }
+    li.item {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      clear: both;
+      overflow: hidden;
+    }
+
+    li.item input {
+      border:0;
+      border-left: 1px solid #ddd;
+      font-size: 20px;
+      padding:10px;
+      display: inline-block;
+    }
+    li.item input:focus {
+      outline:0;
+      box-shadow:inset 0 0 3px yellow;
+    }
+
+    input[type="text"] {
+      width:65%;
+      float:left;
+      
+    }
+    input[type="number"] {
+      width:35%;
+      float:left;
+    }
+    a.addItem {
+     background:#c0392b;
+     padding:10px;
+     display: inline-block;
+     margin-bottom: 10px;
+     color:white;
+     text-decoration: none;
+     font-family: sans-serif;
+     border-radius:10px;
+    }
+
+    .totals {
+      text-align: right;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      
+      $('a.addItem').on('click',function() {
+        var newItem = $('.blankItem .item').clone();
+        $('.invoiceItems').append(newItem);
+      }); // end add item click
+
+      // add three by faking 3 clicks
+      $('a.addItem').click().click().click();
+
+      $('.invoice').on('keyup','input',function() {
+        
+        // sum all the inputs up
+        var total = 0;
+        // loop over each one adding as we go
+        $('input[type="number"]').each(function(){
+          // because
+          var val = parseFloat($(this).val());
+          // make sure there is a value in there first before we add it
+          // blank inputs will cause an error
+          if(!!val) {
+            total = total + val;
+          }
+        });
+
+        // update the total
+        $('p.subTotal span').text(total);
+
+        // calc the HSt and update
+        var hst = total * .13;
+        hst = hst.toFixed(2);
+        $('p.hst span').text(hst);
+
+        // calc the total
+        var grandTotal = total * 1.13;
+        // round it to two decimal palces
+        grandTotal = grandTotal.toFixed(2);
+        $('p.grandTotal span').text(grandTotal);
+
+
+      });
+
+    }); // end ready
+  </script>
+</body>
+</html>

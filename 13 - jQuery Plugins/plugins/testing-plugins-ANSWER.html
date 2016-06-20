@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testing jQuery Plugins</title>
+
+  <!-- Include All the CSS in the head -->
+  <link rel="stylesheet" href="flexslider/flexslider.css">
+  <link rel="stylesheet" href="paper-collapse/paper-collapse.css">
+
+</head>
+<body>
+
+  <!-- First let's try fit this text-->
+  <p class="fitme">I love jQuery so much!</p>
+  <p class="fitme">It is really the best</p>
+
+  <!-- Now let's try make a youtube video responsive -->
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/sMmjSE_d6J0" frameborder="0" allowfullscreen></iframe>
+
+
+  <!-- Now let's try a flexslider -->
+
+  <div class="flexslider">
+    <ul class="slides">
+      <li><img src="http://lorempixel.com/800/300?v=1" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=2" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=3" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=4" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=5" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=6" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=7" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=8" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=9" alt=""></li>
+      <li><img src="http://lorempixel.com/800/300?v=10" alt=""></li>
+    </ul>
+  </div>
+
+
+  <!-- Finally let's try the paper collapse -->
+  <div class="collapse-card">
+    <div class="title">
+      <span><!-- Optional right aligned text --></span>
+      <strong>Card Title</strong>
+    </div>
+    <div class="body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita saepe delectus dolore, architecto, beatae, reprehenderit quae distinctio pariatur, obcaecati nesciunt perferendis officiis sed laboriosam velit incidunt! Vitae velit, deleniti possimus?</p>
+    </div>
+  </div>
+
+  <div class="collapse-card">
+    <div class="title">
+      <span><!-- Optional right aligned text --></span>
+      <strong>Card Title</strong>
+    </div>
+    <div class="body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita saepe delectus dolore, architecto, beatae, reprehenderit quae distinctio pariatur, obcaecati nesciunt perferendis officiis sed laboriosam velit incidunt! Vitae velit, deleniti possimus?</p>
+    </div>
+  </div>
+
+  <div class="collapse-card">
+    <div class="title">
+      <span><!-- Optional right aligned text --></span>
+      <strong>Card Title</strong>
+    </div>
+    <div class="body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita saepe delectus dolore, architecto, beatae, reprehenderit quae distinctio pariatur, obcaecati nesciunt perferendis officiis sed laboriosam velit incidunt! Vitae velit, deleniti possimus?</p>
+    </div>
+  </div>
+  
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background:#ecf0f1;
+      color:#c0392b;
+      text-align: center;
+    }
+
+    .wrapper {
+      max-width: 840px;
+      border: 1px solid red;
+    }
+  </style>
+
+  <!-- Include jQuery First -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Then include the plugins you want. The order here doesn't matter as long as they come before our own javascript -->
+  <script src="jquery.fittext.js"></script>
+  <script src="jquery.fitvids.js"></script>
+  <script src="paper-collapse/paper-collapse.js"></script>
+  <script src="flexslider/jquery.flexslider-min.js"></script>
+  <!-- Finally we either use our own script tags, or an external JS file -->
+
+  <script>
+    $(function() {
+      $('p.fitme').fitText();
+
+      $('body').fitVids();
+
+      $('.flexslider').flexslider({
+        animation: "slide"
+      });
+
+
+    });// end doc ready
+  </script>
+</body>
+</html>

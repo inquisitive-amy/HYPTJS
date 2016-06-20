@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chart.js</title>
+</head>
+<body>
+
+
+  <canvas class="mychart" width="700" height="400"></canvas>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+
+  <script>
+    $(function() {
+
+      // first we select the canvas element
+      // we grab the first one with [0] because we will be calling native javascript methods on it
+      var canvas = $('.mychart')[0];
+
+      // then we grab the context - 2d or 3d
+      var ctx = canvas.getContext('2d');
+
+      // Specify the Data to be used by the chart:
+
+      var data = {
+          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          datasets: [
+              {
+                  label: "My First dataset",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: [65, 59, 80, 81, 56, 55, 40]
+              },
+              {
+                  label: "My Second dataset",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: [28, 48, 40, 19, 86, 27, 90]
+              }
+          ]
+      };
+
+      // create an options object
+      // for now we leave it blank but we can put any options: http://www.chartjs.org/docs/#getting-started-global-chart-configuration
+      var options = {};
+
+      // Finally we kick the chart off
+
+      // we pass it the context, data and options
+      var myLineChart = new Chart(ctx).Line(data, options);
+
+
+    });
+  </script>
+
+</body>
+</html>

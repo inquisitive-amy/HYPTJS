@@ -57,43 +57,35 @@
     }
 
     .hand {
-      width:50%;
-      height:6px;
-      background:black;
+      height: 50%;
+      width: 6px;
+      background: black;
       position: absolute;
-      top:50%;
-      transform-origin:100%; /* this puts the pivot point all the way to the right of the hand */
-      transition:transform 0.1s cubic-bezier(0.64, 2.24, 0.58, 1);
-      box-shadow:0 0 0 4px rgba(0,0,0,0.05);
-    }
+      top: 0;
+      transform-origin: 100%;
+      transition: transform 0.1s cubic-bezier(0.64, 2.24, 0.58, 1);
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+      -webkit-transform:translateX(-50%);
+      -moz-transform:   translateX(-50%);
+      -ms-transform:    translateX(-50%);
+      -o-transform:     translateX(-50%);
+      transform:        translateX(-50%);
+      left: 50%;
+    } 
 
     .hand.hour-hand{
-      transform-origin: 100%;
-      transform: rotate(10deg);
+      background: red;
     }
-
+      
     .min-hand{
-      display: none;
+      background: yellow;
     }
 
-    .hand.second-hand{
-      rotate: 90deg;
+    .min-hand,
+    .hand.second-hand,
+    .hand.hour-hand{
+        transform-origin: 0 100%;
     }
-
- /*   .hand.second-hand {
-      animation: moveHand 1s infinite;
-      transform:rotate(90deg);
-    }*/
-
-    /* Standard syntax */ 
-/*    @keyframes moveHand {
-      from {
-        transform : rotate(0deg);
-      }
-      to{
-        transform:rotate(360deg);
-      }
-    }*/
 
     .time{
       color: white;
@@ -114,53 +106,44 @@
     // http://momentjs.com/
 
 
-    // Get the date so we can tell the hour, min, seconds 
-    // for when the page loads
-
-    // var half;
-
-    // if(hour > 12){
-    //   half = 'PM';
-    // }
-    // else{
-    //   half = 'AM';
-    // }
-
-    // console.log(half);
-
-    // $('.second-hand').addClass('found');
-
-
+    // Every second get the updated time to move
+    // the hands on the clock accordingly
     window.setInterval(function(){
 
+      // 1. Get todays time
       var d = new Date();
+
+      // 2. Calculate the hour, minute and second
       var hour = d.getHours();
       var minute = d.getMinutes();
       var second = d.getSeconds();
 
-      hour = hour % 12;
-      hour = hour ? hour : 12;
-      // var hourDegree;
-      // hourDegree = (hour/180)*100;
-
-      function toRadians(angle){
-        return angle * (Math.PI/360);
+      // 3. Turn Hours from 24 into 12
+      // 13 = 1, 14 = 12 etc...
+      if (hour  >= 12){
+         hour = hour - 12;
       }
-
-      var hourDegree = toRadians(hour);
-
-      hourDegreeWhole = Math.round(hourDegree);
-
-      jQuery('.hour-hand').css('transform' ,'rotate('+ hourDegreeWhole +'deg)');
-
-      jQuery('.second-hand').css('transform' ,'rotate('+ second +'deg)');
-
-
+    
+      // 4. Add an analog clock to verify time
       jQuery('.time p').html('HOURS:' + hour + ' MIN:' + minute + ' SECOND:' + second);
 
+      // 5. Turn time into degrees
+      // 360 degrees in an hour/60 minutes in an hour
+      var minutesInDegrees = 360/60 * minute;
+
+      // 360 degrees in an minute/60 seconds in an minute
+      var secondsInDegrees = 360/60 * second;
+
+      // 360 degrees in an hour/12 hours in a round of the clock
+      var hoursInDegrees = 360/12 * hour;
+
+      // 6. Position hands on the clock
+      jQuery('.hour-hand').css('transform' ,'rotate('+ hoursInDegrees +'deg)');
+      jQuery('.second-hand').css('transform' ,'rotate('+ secondsInDegrees +'deg)');
+      jQuery('.min-hand').css('transform' , 'rotate('+ minutesInDegrees + 'deg)');
+
     }, 1000);
-
-
+    // update at an interval of every second
 
 
   </script>

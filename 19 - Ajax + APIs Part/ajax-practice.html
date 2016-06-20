@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX Practice Exercise</title>
+</head>
+<body>
+	<p>Nothing to see here folks. Open up your console!</p>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+	$(function(){
+
+		/* 1a. debugging syntax errors
+			a single AJAX request can end up being several lines of code,
+			so there's lots of opportunities to make syntax errors.
+			Check your console for syntax error messages and see if you can
+			fix it. Make a note of the line number where the error occurred
+			and remember that your mistake is often on the line before. */
+
+		$.ajax({
+			url: 'http://myttc.ca/vehicles/near/queen_and_spadina.json',
+			type: 'GET',
+			dataType: 'jsonp'
+			success: function(data){
+				console.log('1a. syntax error FIXED!');
+			}
+		});
+
+
+		/* 1b. debugging cross-domain errors
+			Run this code as is, and check out the error you get.
+			Fix it by changing the dataType setting to something
+			that facilitates cross-domain requests. */
+
+		$.ajax({
+			url: 'http://myttc.ca/vehicles/near/queen_and_spadina.json',
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				console.log("1b. debugging cross-domain errors, FIXED!");
+			}
+		});
+
+		/* 2. Working with output data
+			You can't print an entire JavaScript object out on to the
+			page, so let's practice getting specific bits of info out
+			of the returned data.*/
+
+		$.ajax({
+			url: 'https://api.github.com/users/hackeryou',
+			type: 'GET',
+			dataType: 'jsonp',
+			/*2a. We need to give our success function a placeholder
+				argument to hold the data the API passes back.
+				One convention is to call this 'response'. Go ahead and write
+				that inside the function parentheses. */
+			success: function(){
+				if (data){
+          console.log("2a. You named the success argument. YEAH!");
+        }
+				/*2b. We're not sure exactly what info this API give
+					us, so console.log() out your new `data` argument
+					here so we can look at the info in the console. */
+					console.log('????');
+
+				/*2c. Let's practice getting a specific piece of information.
+					Look through the data object we logged and find the email
+					address. See if you can get it to log out by accessing
+					the email property from the data object. */
+					console.log('????');
+			}
+		});
+
+		/* 3. Adding a query string to your GET request
+
+			The Chuck Norris Joke generator give us the option of
+			changing the subject of the joke by passing first and
+			last name in a query string. Check out
+			http://api.icndb.com/jokes/random?firstName=Paul&lastName=Irish
+			We can send query string options in $.ajax by adding
+			more to the settings obejct. */
+
+		$.ajax({
+			url: 'http://api.icndb.com/jokes/random',
+			type: 'GET',
+			dataType: 'jsonp',
+			/* 3a. Go to the $.ajax documentation page:
+				https://api.jquery.com/jQuery.ajax/
+				and search the page (cmd/ctrl+F) for query string to find
+				out what setting you need to add. You should see that it's
+				a settng called data.  Add in this new option on the line
+				below and set it equal to the query string (don't include
+				the question mark). */
+
+			success: function(response){
+				if (response.value.joke.indexOf('Paul') >= 0){
+					console.log(response.value.joke);
+					console.log("3a. Paul Irish joke. NICE!")
+				}
+			}
+		});
+
+		/*3c. Alternate syntax for passing a query string.
+			If you're passing a lot of options in a query string, you
+			might want to list them as their own object of key-value
+			pairs.
+			Copy your ajax request from above and try replacing the
+			query string with an object of your own first and last name.
+			Remeber, object syntax goes like this:
+			{
+				city: "Toronto",
+				province: "Ontario"
+			}
+			*/
+
+	});
+	</script>
+</body>
+</html>

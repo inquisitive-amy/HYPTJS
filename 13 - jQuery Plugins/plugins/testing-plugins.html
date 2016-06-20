@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testing jQuery Plugins</title>
+
+  <!-- Include All the CSS in the head -->
+  <link rel="stylesheet" href="flexslider/flexslider.css">
+  <link rel="stylesheet" href="paper-collapse/paper-collapse.css">
+
+</head>
+<body>
+
+  <!-- First let's try fit this text-->
+  <p class="fitme">I love jQuery so much!</p>
+  <p class="fitme">It is really the best</p>
+
+  <!-- Now let's try make a youtube video responsive -->
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/sMmjSE_d6J0" frameborder="0" allowfullscreen></iframe>
+
+  <!-- Now let's try a flexslider -->
+
+
+  <!-- Finally let's try the paper collapse -->
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background:#ecf0f1;
+      color:#c0392b;
+      text-align: center;
+    }
+  </style>
+
+  <!-- Include jQuery First -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Then include the plugins you want. The order here doesn't matter as long as they come before our own javascript -->
+  <script src="jquery.fittext.js"></script>
+  <script src="jquery.fitvids.js"></script>
+  <script src="paper-collapse/paper-collapse.js"></script>
+  <script src="flexslider/jquery.flexslider-min.js"></script>
+  <!-- Finally we either use our own script tags, or an external JS file -->
+
+  <script>
+    $(function() {
+      
+      // let's go!
+      
+
+    });// end doc ready
+  </script>
+</body>
+</html>

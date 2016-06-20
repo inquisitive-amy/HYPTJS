@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animations!</title>
+  <!-- We include animate.css in the head -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+
+</head>
+<body>
+  
+  <h2>Wes Bos</h2>
+
+  <style>
+    h2 {
+      text-align: center;
+      font-size: 210px;
+      font-family: sans-serif;
+      color:red;
+      
+    }
+
+    h2.animated {
+      -webkit-animation-duration:15s;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    // document ready start
+    $(function() {
+      // let's go!
+
+
+      $('h2').on('click',function(){
+        $(this).addClass('animated wobble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+          // this runs once the animation is finished
+          $(this).removeClass('animated wobble');
+        }); 
+      });
+
+
+    }); // end document ready
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Placeholder</title>
+</head>
+<body>
+  <input type="text" value="I'm the default Text!" title="I'm the default Text!">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      // listen for the 'focus event'
+      $('input').on('focus',function() {
+        // get the current value
+        var val = $(this).val();
+        // get the default text (Stored in title for this)
+        var title = $(this).attr('title');
+        // check if they are the same
+        if(val === title) {
+          // if they are, clear the default text
+          // and allow user to type 
+          $(this).val(''); // clear it
+        }
+      });
+    });
+  </script>
+</body>
+</html>

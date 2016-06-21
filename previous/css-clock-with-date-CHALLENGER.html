@@ -87,6 +87,10 @@
         transform-origin: 0 100%;
     }
 
+    .second-hand.stop-animation{
+      transform: none;
+    }
+
     .time{
       color: white;
     }
@@ -105,6 +109,9 @@
     // EXAMPLE: http://wes.io/dpjN
     // http://momentjs.com/
 
+    var clockApp = {};
+
+    clockApp.init = function(){
 
     // Every second get the updated time to move
     // the hands on the clock accordingly
@@ -118,14 +125,26 @@
       var minute = d.getMinutes();
       var second = d.getSeconds();
 
+      var $secondHand = $('.second-hand');
+      var $minuteHand = $('.min-hand');
+      var $hourHand = $('.hour-hand');
+
       // 3. Turn Hours from 24 into 12
       // 13 = 1, 14 = 12 etc...
       if (hour  >= 12){
          hour = hour - 12;
       }
-    
+
+      //Add and remove class to stop/start animation at 59seconds
+
+      if (second === 59){
+          $secondHand.addClass('stop-animation');
+      } else if ( second >= 0 && second <= 58){
+          $secondHand.removeClass('stop-animation');
+      }
+
       // 4. Add an analog clock to verify time
-      jQuery('.time p').html('HOURS:' + hour + ' MIN:' + minute + ' SECOND:' + second);
+      $('.time p').html('HOURS:' + hour + ' MIN:' + minute + ' SECOND:' + second);
 
       // 5. Turn time into degrees
       // 360 degrees in an hour/60 minutes in an hour
@@ -138,12 +157,17 @@
       var hoursInDegrees = 360/12 * hour;
 
       // 6. Position hands on the clock
-      jQuery('.hour-hand').css('transform' ,'rotate('+ hoursInDegrees +'deg)');
-      jQuery('.second-hand').css('transform' ,'rotate('+ secondsInDegrees +'deg)');
-      jQuery('.min-hand').css('transform' , 'rotate('+ minutesInDegrees + 'deg)');
+      $hourHand.css('transform','rotate('+ hoursInDegrees +'deg)');
+      $secondHand.css('transform','rotate('+ secondsInDegrees +'deg)');
+      $minuteHand.css('transform','rotate('+ minutesInDegrees + 'deg)');
 
     }, 1000);
     // update at an interval of every second
+    }
+
+    $(function(){
+      clockApp.init();
+    });
 
 
   </script>

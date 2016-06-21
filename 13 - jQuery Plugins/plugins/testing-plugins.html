@@ -6,10 +6,39 @@
 
   <!-- Include All the CSS in the head -->
   <link rel="stylesheet" href="flexslider/flexslider.css">
-  <link rel="stylesheet" href="paper-collapse/paper-collapse.css">
+  <link rel="stylesheet" href="https://rawgit.com/alexander-ruehle/paper-collapse/master/paper-collapse.css">
+  <link rel="stylesheet" type="text/css" href="sweetalert.css">
 
 </head>
 <body>
+  <div class="collapse-card">
+    <div class="collapse-card__heading">
+      <div class="collapse-card__title">
+      <h2>TITLE 1</h2>
+        <i class="fa fa-question-circle fa-2x fa-fw"></i>
+        <!-- Title Text -->
+      </div>
+    </div>
+    <div class="collapse-card__body">
+      <!-- Body Text -->
+      <p>BODY OF CARD</p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, inventore!
+    </div>
+  </div>
+    <div class="collapse-card">
+    <div class="collapse-card__heading">
+      <div class="collapse-card__title">
+      <h2>TITLE 1</h2>
+        <i class="fa fa-question-circle fa-2x fa-fw"></i>
+        <!-- Title Text -->
+      </div>
+    </div>
+    <div class="collapse-card__body">
+      <!-- Body Text -->
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo pariatur labore incidunt doloremque eos architecto nesciunt, repudiandae, quasi voluptatum nisi sunt ab cupiditate eveniet iste debitis, voluptatem omnis eligendi, placeat sint tempore quae maiores ipsum assumenda. Quo, ipsam, odit. Accusantium reiciendis, nihil, ex deserunt incidunt recusandae officia ullam quas aliquid.orem ipsum dolor sit amet, consectetur adipisicing elit. Nemo pariatur labore incidunt doloremque eos architecto nesciunt, repudiandae, quasi voluptatum nisi sunt ab cupiditate eveniet iste debitis, voluptatem omnis eligendi, placeat sint tempore quae maiores ipsum assumenda. Quo, ipsam, odit. Accusantium reiciendis, nihil, ex deserunt incidunt recusandae officia ullam quas aliquid. orem ipsum dolor sit amet, consectetur adipisicing elit. Nemo pariatur labore incidunt doloremque eos architecto nesciunt, repudiandae, quasi voluptatum nisi sunt ab cupiditate eveniet iste debitis, voluptatem omnis eligendi, placeat sint tempore quae maiores ipsum assumenda. Quo, ipsam, odit. Accusantium reiciendis, nihil, ex deserunt incidunt recusandae officia ullam quas aliquid.   </p>
+      <p class="collapse-card__close_handle">View Less</p>
+    </div>
+  </div>
 
   <!-- First let's try fit this text-->
   <p class="fitme">I love jQuery so much!</p>
@@ -20,6 +49,19 @@
 
   <!-- Now let's try a flexslider -->
 
+<div class="flexslider">
+  <ul class="slides">
+    <li><img src="http://placehold.it/1350x150" alt=""></li>
+    <li><img src="http://placehold.it/1350x150" alt=""></li>
+    <li><img src="http://placehold.it/1350x150" alt=""></li>
+    <li><img src="http://placehold.it/1350x150" alt=""></li>
+    <li><img src="http://placehold.it/1350x150" alt=""></li>
+  </ul>
+</div>
+
+  <!-- Swal Buttons -->
+  <button class="try-me">Try me!</button>
+  <button class="second-button">Another Button</button>
 
   <!-- Finally let's try the paper collapse -->
 
@@ -39,17 +81,44 @@
   <!-- Then include the plugins you want. The order here doesn't matter as long as they come before our own javascript -->
   <script src="jquery.fittext.js"></script>
   <script src="jquery.fitvids.js"></script>
-  <script src="paper-collapse/paper-collapse.js"></script>
+  <script src="https://rawgit.com/alexander-ruehle/paper-collapse/master/paper-collapse.js"></script>
   <script src="flexslider/jquery.flexslider-min.js"></script>
   <!-- Finally we either use our own script tags, or an external JS file -->
+  <script src="sweetalert.min.js"></script>
 
   <script>
     $(function() {
+      //Fit Vid
+      $("body").fitVids();  
       
-      // let's go!
+      //Fit Text
+      $('.fitme').fitText();
       
+      //Flex Slider
+      $('.flexslider').flexslider({
+         animation: "slide"
+       });
 
-    });// end doc ready
+      //Collapse Card
+      $(".collapse-card").paperCollapse({
+        closeHandler : ".collapse-card__close_handle"
+      });
+
+      //Swal
+      $('.try-me').on('click', function(){
+        swal({
+          title: "Auto close alert!",
+          text: "I will close in 2 seconds.",
+          timer: 2000,
+          showConfirmButton: false
+        });
+      });
+
+      $('.second-button').on('click', function(){
+        swal("Good job!", "You clicked the button!", "success")
+      });
+
+  });// end doc ready
   </script>
 </body>
 </html>

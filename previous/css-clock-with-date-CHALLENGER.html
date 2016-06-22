@@ -3,11 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <title>Break Timer</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+  <script src="sweetalert.min.js"></script>
+  <link rel="stylesheet" href="sweetalert.css">
 </head>
 <body>
-    <div class="time"><p>HOURS: MIN: SEC:</p></div>
+    <h1 class="time"></h1>
 
     <div class="clock">
       <div class="clock-face">
@@ -18,28 +21,24 @@
     </div>
 
   <style>
-    html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
-      background-size:cover;
-      font-family:'helvetica neue';
-      text-align: center;
-      font-size: 10px;
-    }
 
-    body {
-      font-size: 2rem;
-      display:flex;
-      flex:1;
-      min-height: 100vh;
-      align-items: center;
-    }
+  html{
+    font-family: 'Patua One', cursive;
+    background: deeppink;
+   text-align: center;
+  }
+
+  input{
+    display: inline-block;
+    vertical-align: middle;
+  }
 
     .clock {
-      width: 30rem;
-      height: 30rem;
-      border:20px solid white;
+      width: 20rem;
+      height: 20rem;
+      border:10px solid white;
       border-radius:50%;
-      margin:50px auto;
+      margin: 30px auto 50px;
       position: relative;
       padding:2rem;
       box-shadow:
@@ -47,13 +46,39 @@
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
+      background-color: azure;      
     }
 
     .clock-face {
+      opacity: 0;
       position: relative;
       width: 100%;
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .clock-face.active{
+      transition: opacity 1s;
+      opacity: 1;
+    }
+
+    .clock-face:before{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      z-index: 10;
+      box-shadow:   
+        0 0 0px 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 5px rgba(0,0,0,0.2);
+
     }
 
     .hand {
@@ -72,17 +97,15 @@
       transform:        translateX(-50%);
       left: 50%;
     } 
-
-    .hand.hour-hand{
-      background: red;
-    }
       
-    .min-hand{
-      background: yellow;
+    .hand.second-hand{
+      background: white;
+      width: 3px;
     }
 
-    .min-hand,
+
     .hand.second-hand,
+    .min-hand,
     .hand.hour-hand{
         transform-origin: 0 100%;
     }
@@ -92,7 +115,15 @@
     }
 
     .time{
-      color: white;
+      opacity: 0;
+      color: black;
+      text-align: center;      
+      transition: opacity 1s;
+      height: 50px;
+    }
+
+    .time.active{
+      opacity: 1;
     }
 
   </style>
@@ -131,9 +162,27 @@
 
       // 3. Turn Hours from 24 into 12
       // 13 = 1, 14 = 12 etc...
+      var timeOfDay = '';
+
       if (hour  >= 12){
          hour = hour - 12;
+         timeOfDay = 'PM'
       }
+      else{
+         timeOfDay = 'AM'    
+      }
+
+      var i ;
+
+   function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+    var digitMinute = addZero(minute);
+      
 
       //Add and remove class to stop/start animation at 59seconds
 
@@ -144,7 +193,10 @@
       }
 
       // 4. Add an analog clock to verify time
-      $('.time p').html('HOURS:' + hour + ' MIN:' + minute + ' SECOND:' + second);
+      var analogTime = $('.time');
+      analogTime.html(hour + ':' + digitMinute + ' ' + timeOfDay);
+      analogTime.addClass('active');
+      $('.clock-face').addClass('active');
 
       // 5. Turn time into degrees
       // 360 degrees in an hour/60 minutes in an hour

@@ -3,7 +3,7 @@
 <head>
   <title>jQuery Gallery</title>
   <link rel="stylesheet" href="stylesheet.css">
-  <link rel="stylesheet" href="jquery.fancybox.css">
+  <link rel="stylesheet" href="fancybox/jquery.fancybox.css">
 </head>
 
 <body>
@@ -36,26 +36,34 @@
     $(function() {
       var previews = $('.previews a');
       var $fullImage = $('.full img');
+
       previews.on('click', function(e){
         e.preventDefault();
         
         var data = $(this).data();
         var largeImage = data.full;
+        // var largeImage = this.dataset.full;
+        // ^ this is the same just with javascript not jQuery
 
         previews.removeClass('selected');
         $(this).addClass('selected');
 
-        $fullImage.attr('src', largeImage);
-      });
+        $fullImage.fadeOut(function(){
+          //When the fadeout finished fade in
+          //This is a callback and it will only run the thing inside once the fade
+          //out has finished running
+          $fullImage.attr('src', largeImage).fadeIn();
+        }); //end fadeout
+      
+      }); //end previews on click
 
       $fullImage.on('click', function(e){
           e.preventDefault();
           largeImgSrc = $(this).attr('src');
           $.fancybox(largeImgSrc);        
-      });
+      }); // end fancybox onclick
 
-
-    });
+    });// end document ready
   </script>
 </body>
 </html>

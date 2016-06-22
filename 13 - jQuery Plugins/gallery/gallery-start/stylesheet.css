@@ -26,7 +26,12 @@
     margin-bottom: 10px;
 }
 
-.gallery .full, .gallery .full img {
+.gallery .previews a img{
+  display: block;
+}
+
+.gallery .full, 
+.gallery .full img {
     height: 600px;
 }
 

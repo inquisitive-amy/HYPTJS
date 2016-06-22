@@ -1,0 +1,75 @@
+html{
+      font-family: 'Patua One', cursive;
+      background: deeppink;
+      text-align: center;
+    }
+
+    input{
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .countdown{
+      font-size: 100px;
+    }
+
+    .button{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: black;
+      color: white;
+      height: 55px;
+      border-radius: 0;
+      border: 0;
+      font-size: 20px;
+      padding: 10px 25px;
+      box-sizing: border-box;
+      margin-left: 10px;
+    }
+
+    .button:hover{
+      background: #ccc;
+      color: #000;
+    }
+
+    .auto-set{
+      display: block;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .break{
+      height:50px;
+      width: 50%;
+      margin: 0 auto;
+      font-size: 20px;
+      padding: 0 10px;
+      border-color: white;    
+    }
+    
+    .break:focus{
+      border-color: black;
+      outline: none;
+    }
+
+    .first-alert{
+      background-color: tomato;      
+    }
+
+    .second-alert{
+      background-color: orange;      
+    }
+
+    .time{
+      opacity: 0;
+      color: black;
+      text-align: center;      
+      transition: opacity 1s;
+      height: 50px;
+      font-size: 15px;
+    }
+
+    .time.active{
+      opacity: 1;
+    }

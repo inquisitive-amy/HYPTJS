@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Break Timer</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+  <script src="sweetalert.min.js"></script>
+  <link rel="stylesheet" href="sweetalert.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 class="time"></h1>
+  <h2>Let's Take a Break!</h2>
+
+  <form>
+    <a href="#" class="button pre-set" data-time="60">Lunch</a>
+    <a href="#" class="button pre-set" data-time="20">20 minutes</a>
+    <a href="#" class="button pre-set" data-time="15">Morning Break</a>
+
+    <input class="break" type="text" name="break-time" placeholder="See you in ____ minutes" required>
+    <input class="button" id="submit_time" value="Start Timer" type="submit">
+  </form>
+
+  <h3 class="countdown">
+    0:00
+    <span class="min"></span>
+    <span class="seconds"></span>
+  </h3>
+
+  <script>
+    //1. Create Application Object
+    var clockApp = {};
+
+    //2. Create a function that initializes our application object
+    clockApp.init = function(){
+
+    //3. Cache variables
+    var countDown = $('.countdown');
+    var message = 'Its counting down';
+    var preSetTimes = $('.pre-set');
+    var breakTime = $('input[name="break-time"]');
+    var submit = $('#submit_time');
+
+    preSetTimes.on ('click', function(e){
+      e.preventDefault();
+        breakTime.val($(this).data('time'));
+    });
+
+    function getBreakTime() {
+
+      // Add time to the timer
+      submit.on('click', function(e){
+        e.preventDefault();
+        NewbreakTime = breakTime.val();
+        var seconds = 60; 
+
+      // Show an alert if there is no time captured
+        if(!NewbreakTime){
+            swal("Oops...", "You forgot to add a time!", "error");
+        }
+        else{
+          // if there is a time set, start a countdown
+          setInterval(function(){
+            $('.minutes').html(NewbreakTime-1);
+
+            if(seconds > 0){
+               $('.seconds').html(seconds--);
+            }            
+            // if(NewbreakTime === 10){
+            //   $('html').addClass('first-alert');
+            // }
+            // if(NewbreakTime === 0){
+            //     $('html').removeClass('first-alert');
+            //     $('html').addClass('second-alert');
+            // }
+          }, 1000);
+        }
+      });
+      //end on click
+    }
+
+    getBreakTime();
+
+  }
+
+  $(function(){
+    clockApp.init();
+  });
+  </script>
+</body>
+</html>
+

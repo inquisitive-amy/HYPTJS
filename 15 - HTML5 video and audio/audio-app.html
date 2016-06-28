@@ -16,69 +16,49 @@
 	<div class="controls">
 		<button data-action="play">Play</button>
 		<button data-action="pause">Pause</button>
-		<button data-skip="20" class="ffw">FFWD</button>
-		<button data-skip="-10" class="rewind">RWD</button>
+		<button data-skip="15" class="ffw">FFWD</button>
+		<button data-skip="-15" class="rewind">RWD</button>
 		<input type="range"/>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
 	<script>
 
 		var app = {};
 
-		app.play = function(){
+		var video = $('.trailer')[0];
 
-		};//close app.play
+		app.togglePlay = function(action){
+			video[action]();
+		}//close app.togglePlay
 
-		app.pause = function(){
-
-		};//close app.pause
-
-		app.skip = function(){
-
+		app.skip = function(skipNumber){
+			video.currentTime += skipNumber;
 		};//close app.skip
 
 
 		app.init = function(){
+			
+			var actions = $('[data-action]');
+			var skipTime = $('[data-skip]');
+
+			actions.on('click', function(){
+				var action = this.dataset.action;
+				app.togglePlay(action);
+			});
+
+			skipTime.on('click', function(){
+				var skipAmount = parseFloat(this.dataset.skip);
+				app.skip(skipAmount);
+			});		
 
 		};//close app.init
 
 
-		// call app.init on document ready.
 		$(function(){
 			app.init();
 		});
-
-
-		// $(function(){
-		// 	// select all data-action elements
-		// 	// better to listen to all data-acton elements than a specific class on each one
-
-		// 	var actions = $('[data-action]');
-		// 	var video = $('.trailer')[0];
-
-		// 	actions.on('click', function(){
-		// 		var action = this.dataset.action;
-		// 		console.log(action);
-		// 		//access a method dynamically with square bracket syntax
-		// 		//we can't use the .action() because that is not a method
-		// 		//dynamically call .play() and .pause()
-		// 		video[action]();
-		// 	});
-
-		// 	$('.ffw').on('click', function(){
-		// 		video.currentTime += 10;
-		// 	});
-
-		// 	var skipTime = $('[data-skip]');
-		// 	skipTime.on('click', function(){
-		// 		// we need a number, not a string so we use 
-		// 		// parseFloat to turn it into a number
-		// 		var skipAmount = parseFloat(this.dataset.skip);
-		// 		console.log(skipAmount);
-		// 		video.currentTime += skipAmount;				
-		// 	});
-		// });
 
 	</script>
 </body>

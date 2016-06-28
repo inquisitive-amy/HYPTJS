@@ -6,12 +6,15 @@
 </head>
 <body>
   <div class="videoPlayer">
-    <video src="files/trailer.mp4" autoplay></video>
+    <video class="trailer" src="files/trailer.mp4" autoplay></video>
     
     <div class="controls">
     
-      <a href="#" class="play">Play</a>
-      <a href="#" class="pause">Pause</a>
+      <a href="#" class="play" data-action="play">Play</a>
+      <a href="#" class="pause" data-action="pause">Pause</a>
+      <!-- <a href="#" class="toggle" >Toggle</a> -->
+
+      <a href="" class="mute">Mute</a>
       
       <div class="progressWrapper">
         <div class="progress"></div>
@@ -39,7 +42,35 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
     $(function(){
-      // Go nuts
+     
+     var actions = $('[data-action]');
+     //need the first element not a jquery object
+     var video = $('.trailer')[0];
+
+     actions.on('click', function(e){
+      e.preventDefault();
+        var action = this.dataset.action;
+        console.log('action:'+action);
+        console.log('paused:'+video.paused);
+        console.log('volume:'+video.volume);
+        video[action]();
+     });
+
+     $('.mute').on('click', function(e){
+      console.log(video.muted);
+        if(video.muted == false){
+          video.muted = true;
+        }else{
+          video.muted = false;
+        }
+     });
+
+     console.log('volume: '+video.volume);
+     $('.volume').on('change', function(){
+        video.volume = 0.5;
+        console.log(typeof video.volume);
+     });
+
     });
   </script>
 </body>

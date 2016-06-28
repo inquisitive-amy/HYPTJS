@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Audio</title>
+</head>
+<body>
+<!-- 	<button class="play">Play</button>
+	<audio class="tunes" src="files/everlea.mp3" controls></audio>
+ -->
+	<video controls class="trailer">
+		<source src="files/trailer.webm"></source>
+		<source src="files/trailer.mp4"></source>
+	</video>
+
+	<div class="controls">
+		<button data-action="play">Play</button>
+		<button data-action="pause">Pause</button>
+		<button data-skip="20" class="ffw">FFWD</button>
+		<button data-skip="-10" class="rewind">RWD</button>
+		<input type="range"/>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script>
+
+		// var play = $('button.play');
+		// play.on('click', function(){
+
+		// 	var audio = $('audio.tunes');
+		// 	// return the first element selected from the jquery array
+		// 	// you cant call javascript .play() on a jquery array
+
+
+		// 	// JAVASCRIPT
+		// 	var audio = document.querySelector('audio.tunes');
+		// 	audio.play();
+
+		// 	// OR JQUERY
+		// 	// audio[0].play();
+		// 	// audio.trigger('play');
+		// });
+
+		// var playVideo = $('button')
+		// var video = document.querySelector('video.movie');
+		// video.play();
+
+
+		$(function(){
+			// select all data-action elements
+			// better to listen to all data-acton elements than a specific class on each one
+
+			var actions = $('[data-action]');
+			var video = $('.trailer')[0];
+
+			actions.on('click', function(){
+				var action = this.dataset.action;
+				console.log(action);
+				//access a method dynamically with square bracket syntax
+				//we can't use the .action() because that is not a method
+				//dynamically call .play() and .pause()
+				video[action]();
+			});
+
+			$('.ffw').on('click', function(){
+				video.currentTime += 10;
+			});
+
+			var skipTime = $('[data-skip]');
+			skipTime.on('click', function(){
+				// we need a number, not a string so we use 
+				// parseFloat to turn it into a number
+				var skipAmount = parseFloat(this.dataset.skip);
+				console.log(skipAmount);
+				video.currentTime += skipAmount;				
+			});
+		});
+
+
+	</script>
+</body>
+</html>

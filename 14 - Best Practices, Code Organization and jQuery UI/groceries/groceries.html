@@ -20,22 +20,30 @@
       </label>
       <input type="submit" value="Add Grocery Item">
     </form>
+
+    <div class="popular">
+      <button>cheese</button>
+      <button>milk</button>
+      <button>bread</button>
+      <button>eggs</button>
+      <button>carrots</button>
+    </div>
     
-    <ul class="groceries">
-      <li class="heading">Basics</li>
-      <li>Milk</li>
-      <li>Eggs</li>
-      <li>Bread</li>
-      <li class="heading">Kids</li>
-      <li>Koolaid</li>
-      <li>Popsicles</li>
+    <ul id="sortable1" class="groceries connectedSortable">
+      <li class="heading">Basics<a href="#" class="remove">X</a></li>
+      <li>Milk<a href="#" class="remove">X</a></li>
+      <li>Eggs<a href="#" class="remove">X</a></li>
+      <li>Bread<a href="#" class="remove">X</a></li>
+      <li class="heading">Kids<a href="#" class="remove">X</a></li>
+      <li>Koolaid<a href="#" class="remove">X</a></li>
+      <li>Popsicles<a href="#" class="remove">X</a></li>
     </ul>
 
-    <ul class="got">
+    <ul id="sortable2" class="got connectedSortable">
       <li class="heading">Done</li>
-      <li>one</li>
-      <li>two</li>
-      <li>three</li>
+      <li>one<a href="#" class="remove">X</a></li>
+      <li>two<a href="#" class="remove">X</a></li>
+      <li>three<a href="#" class="remove">X</a></li>
     </ul>
 
   </div>
@@ -45,39 +53,72 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script>
     
-    // first we create an app namespace
     var app = {};
 
     app.addItem = function(itemName){
-      // 1. write the code to create a list item and add it to the groceries list
-      // You can test it from the browser by running app.addHeading('Carrots');
-
+      var removeBtn = $('<a href="#" class="remove">X</a>');    
+      var li = $('<li>'+itemName+'</li>');
+      li.append(removeBtn);
+      $('ul.groceries').append(li);
     };
 
     app.addHeading = function(headingName) {
-      // 2. write the code to create a list item header and add it to the groceries list
-      // You can test it from the browser by running app.addHeading('Vegetables');
+      var removeBtn = $('<a href="#" class="remove">X</a>');    
+      var li = $('<li>'+headingName+'</li>');
+      li.addClass('heading');
+      li.append(removeBtn);
+      $('.groceries').append(li);
     };
+
+    app.removeItem = function(listItem){
+      listItem.remove();
+    }
+
+    app.clearForm = function(){
+      $('input[name="itemName"]').val("");
+    }
 
     app.init = function() {
       
-      // listen for the "submit" event on the form.
       $('form.item').on('submit',function(e) {
-        // 3. stop the form from submitting and refreshing the page
+  
+        e.preventDefault();
         
-        // 4. Do stuff to make it go into the form
+        var headingCheck = $('#heading').is(':checked');
+        var listItem = $('input[name="itemName"]').val();
+
+        if(headingCheck){
+            app.addHeading(listItem);
+        }else{
+            app.addItem(listItem);
+        }
+
+        app.clearForm();
       });
 
-      // 5. make it sortable with jQuery UI
-      
+      $('.popular button').on('click', function(e){
+          e.preventDefault();
+          var buttonName = $(this).text();
+          app.addItem(buttonName);
+      });
+
+      //remove isn't on the page when its loaded so we use delegation
+      $(document).on('click', '.remove' , function(e){
+          e.preventDefault();
+          var parent = $(this).closest('li');
+          app.removeItem(parent);
+      });
+
+      $('.groceries, .got').sortable({
+          connectWith: ".connectedSortable"
+      });
+
     };
 
     $(function() {
-      // on document ready we run app.init
       app.init();
     });
   </script>
-
 
 </body>
 </html>

@@ -1,0 +1,104 @@
+body{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+}
+.controls{
+	box-sizing: border-box;
+	width: 640px;
+	margin: 0 auto;
+	padding: 30px;
+	background: #cecece;
+}
+
+button{
+	background: black;
+	color: white;
+	border: none;
+	padding: 20px;
+	width: 100px;
+	text-align: @charset "UTF-8";	
+	margin: 0 5px 5px 0;
+}
+
+button.muted{
+	padding: 10px;
+	background: white;
+	color: black;
+	width: 40px;
+}
+
+button.muted:hover{
+	background: #eee;
+}
+
+button:hover{
+	background: teal;
+}
+
+button .fa{
+	padding-right: 5px;
+}
+
+.current-time{
+	display: block;
+	background: rgba(255,255,255,0.5);
+	padding: 10px;
+	line-height: 1;
+	position: absolute;
+	top: -40px;
+	left: 0;
+	margin-left: -32px;
+	text-align: center;
+	width: 50px;
+	font-size: 10px;
+}
+
+.current-time:after{
+ content: "";
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent; 
+  border-top: 10px solid rgba(255,255,255,0.5);
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+}
+
+.input-box{
+	margin-top: 20px;
+}
+
+label{
+	text-transform: uppercase;
+}
+
+label .fa{
+	padding-right: 5px;
+}
+
+.input-box label,
+.input-box input{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.buffer{
+	background: white;
+	height: 10px;
+	display: inline-block;
+}
+
+.buffer-container{
+	position: relative;
+	text-align: left;
+	margin: 20px 0 40px;
+	background: rgba(0,0,0,0.25);
+}
+
+.duration{
+	width: 100px;
+	display: inline-block;
+	padding: 19px 0;
+	background: rgba(255,255,255,0.5);
+}

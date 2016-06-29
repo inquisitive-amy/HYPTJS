@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Audio</title>
+	<link rel="stylesheet" href="style.css">
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+	<script src="https://use.fontawesome.com/2e8901468a.js"></script>
+</head>
+<body>
+
+	<video class="trailer">
+		<source src="../files/trailer.webm"></source>
+		<source src="../files/trailer.mp4"></source>
+	</video>
+
+	<div class="controls">
+
+		<div class="buffer-container">
+			<span class="current-time"></span>
+			<span class="buffer"></span>
+		</div>
+
+		<button data-action="play"><i class="fa fa-play"></i><span>Play</span></button>
+		<button data-skip="15" class="ffw"><i class="fa fa-fast-forward"></i>FFWD</button>
+		<button data-skip="-15" class="rewind"><i class="fa fa-fast-backward"></i>RWD</button>
+		<span class="duration"></span>
+
+		<div class="input-box">	
+			<label for="volume"></span>Vol</label>
+			<input class="volume" name="volume" type="range"/>
+			<button class="fa muted fa-volume-up" data-sound="mute"></button>
+		</div>	
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script>
+
+		var app = {};
+
+		var video = $('.trailer')[0];
+
+		app.togglePlay = function(action,button,html,icon){
+			if(video.paused == true){
+				video.play();
+				button.html('Pause');				
+				icon.removeClass('fa-play');
+				icon.addClass('fa-pause');
+			}
+			else{
+				video.pause();
+				button.html('Play');
+				icon.removeClass('fa-pause');
+				icon.addClass('fa-play');
+			}
+		}//close app.togglePlay
+
+
+		app.skip = function(skipNumber){
+			video.currentTime += skipNumber;
+		};//close app.skip
+
+		app.toggleMute = function(button){
+			if(video.muted == false){
+				video.muted = true;
+				button.removeClass('fa-volume-up');
+				button.addClass('fa-volume-down');
+			}else{
+				video.muted = false;
+				button.removeClass('fa-volume-down');
+				button.addClass('fa-volume-up');
+			}
+
+		};//close app.toggleMute;
+
+		app.getCurrentTime = function(clock){
+			var time = video.currentTime;	
+			var t = time.toFixed(2);
+			var durationDisplay = $('.duration');
+			var buffer = $('.buffer');
+			var duration = video.duration;
+			var d = duration.toFixed(2);		
+			var percentage = t/duration*100 + '%';
+
+			var bufferWidth = buffer.width();
+			
+
+			clock.html(t);						
+			durationDisplay.html(d)
+			buffer.css('width' , percentage);
+			$('.current-time').css('left', percentage)
+		}
+
+
+		app.init = function(){
+			
+			//Declare Variables			
+			var actions = $('[data-action]');
+			var skipTime = $('[data-skip]');
+			var currentTime = $('.current-time');
+			var mute = $('[data-sound]');
+			var buffer = $('.buffer');
+
+			// Set the time to 0 on page load
+			app.getCurrentTime(currentTime);
+
+			// Toggle the Play/Pause Button
+			actions.on('click', function(){
+				var action = this.dataset.action;
+				var button = $(this).find('span');
+				var icon = $(this).find('.fa');
+				var html = button.html();			
+				app.togglePlay(action,button,html,icon);
+			});
+
+			// Fast Forward and Rewind			
+			skipTime.on('click', function(){
+				var skipAmount = parseFloat(this.dataset.skip);
+				app.skip(skipAmount);
+			});		
+
+			//Toggle the Mute Button
+			mute.on('click', function(){
+				var muteButton = $(this);
+				app.toggleMute(muteButton);
+			});
+
+			//Update the time when video is playing
+			//Update the buffer when video is playing
+			$('.trailer').on('timeupdate', function(){
+				app.getCurrentTime(currentTime);
+			 });
+
+		};//close app.init
+
+
+		$(function(){
+			app.init();
+		});
+
+	</script>
+</body>
+</html>

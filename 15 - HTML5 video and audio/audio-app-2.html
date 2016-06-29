@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Audio</title>
+</head>
+<body>
+<!-- 	<button class="play">Play</button>
+	<audio class="tunes" src="files/everlea.mp3" controls></audio>
+ -->
+	<video controls class="trailer">
+		<source src="files/trailer.webm"></source>
+		<source src="files/trailer.mp4"></source>
+	</video>
+
+	<div class="controls">
+		<button data-action="play">Play</button>
+		<button data-action="pause">Pause</button>
+		<button data-skip="15" class="ffw">FFWD</button>
+		<button data-skip="-15" class="rewind">RWD</button>
+		<input type="range"/>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<script>
+
+		var app = {};
+
+		var video = $('.trailer')[0];
+
+		app.togglePlay = function(action){
+			video[action]();
+		}//close app.togglePlay
+
+		app.skip = function(skipNumber){
+			video.currentTime += skipNumber;
+		};//close app.skip
+
+
+		app.init = function(){
+			
+			var actions = $('[data-action]');
+			var skipTime = $('[data-skip]');
+
+			actions.on('click', function(){
+				var action = this.dataset.action;
+				app.togglePlay(action);
+			});
+
+			skipTime.on('click', function(){
+				var skipAmount = parseFloat(this.dataset.skip);
+				app.skip(skipAmount);
+			});		
+
+		};//close app.init
+
+
+		$(function(){
+			app.init();
+		});
+
+	</script>
+</body>
+</html>

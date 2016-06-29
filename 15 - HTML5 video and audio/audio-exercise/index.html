@@ -31,6 +31,8 @@
 			<input class="volume" name="volume" type="range"/>
 			<button class="fa muted fa-volume-up" data-sound="mute"></button>
 		</div>	
+
+		<a href="#" class="replay">Replay</a>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -41,6 +43,14 @@
 
 		var video = $('.trailer')[0];
 
+		//Reset the Video to the beginning and button to Play state
+		app.resetVideo = function(){
+			var button = $('[data-action]');
+			button.find('span').html('Play');		
+			button.find('.fa').removeClass('fa-pause').addClass('fa-play');		
+		}
+
+		//Toggle Play and Pause button
 		app.togglePlay = function(action,button,html,icon){
 			if(video.paused == true){
 				video.play();
@@ -50,17 +60,16 @@
 			}
 			else{
 				video.pause();
-				button.html('Play');
-				icon.removeClass('fa-pause');
-				icon.addClass('fa-play');
+				app.resetVideo();
 			}
 		}//close app.togglePlay
 
-
+		//Fast forward and rewind
 		app.skip = function(skipNumber){
 			video.currentTime += skipNumber;
 		};//close app.skip
 
+		//Toggle the Mute Button
 		app.toggleMute = function(button){
 			if(video.muted == false){
 				video.muted = true;
@@ -82,16 +91,19 @@
 			var duration = video.duration;
 			var d = duration.toFixed(2);		
 			var percentage = t/duration*100 + '%';
-
 			var bufferWidth = buffer.width();
-			
-
+		
 			clock.html(t);						
 			durationDisplay.html(d)
 			buffer.css('width' , percentage);
 			$('.current-time').css('left', percentage)
 		}
 
+		// Replay the Video
+		app.replayVideo = function(){
+			video.currentTime = 0;
+			video.play();
+		}
 
 		app.init = function(){
 			
@@ -101,6 +113,7 @@
 			var currentTime = $('.current-time');
 			var mute = $('[data-sound]');
 			var buffer = $('.buffer');
+			var replay = $('.replay');
 
 			// Set the time to 0 on page load
 			app.getCurrentTime(currentTime);
@@ -131,6 +144,20 @@
 			$('.trailer').on('timeupdate', function(){
 				app.getCurrentTime(currentTime);
 			 });
+
+			//when the video ends, show the replay button and set the 
+			//play button back to play
+			$('.trailer').on('ended', function(){
+				// $('.replay').show();
+				app.resetVideo();
+
+			});
+
+			replay.on('click', function(e){
+				e.preventDefault();
+				app.replayVideo();
+				$('.replay').hide();
+			});
 
 		};//close app.init
 

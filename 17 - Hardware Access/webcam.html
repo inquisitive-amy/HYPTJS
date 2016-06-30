@@ -3,38 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <title>getUserMedia()</title>
+  <script src="https://use.fontawesome.com/2e8901468a.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
 
+  <audio class="snap-sound" src="snap.mp3"></audio>
+
+
   <div class="photoBooth">
+    <div class="trash"><div class="fa fa-trash"></div></div>
     <video class="webcam"></video>
     <canvas class="photo"></canvas>
     <div class="strip"></div>
   </div>
 
+  <div class="buttons">
+    <button class="flip">Flip</button>
+    <button class="shoot">Take Photo</button>
+    <button class="timer">5s</button>
+  </div>
+
   <style>
+
+  .trash{
+    width: 100px;
+    height: 100px;
+    border: 2px dotted yellow;
+    display: block;
+  }
+
+  .fa-trash{
+    color: yellow;
+    padding: 37px;    
+    font-size: 30px;
+  }
+
+  .trash:hover{
+    cursor: pointer;
+    border-color: red;
+  }
+
+  .trash:hover .fa-trash{
+    color: red;
+  }
+
     canvas {
       display: none;
     }
 
-    .strip{
-      background: #cecece;
+    a{
+      display: block;
     }
 
-    .strip img {
-      width:400px;
+    .flash {
+      animation: blinker 1s linear infinite;
+    }
+
+    @keyframes blinker {  
+      50% { opacity: 0.0; }
+    }
+
+    .strip{
+      margin-top: 20px;
+    }
+
+    .strip > a {
+        max-width: 100px;
+        float: left;
+        display: block;
+        margin: 5px 1%;
+    }
+
+    .strip img{
+      max-width: 100%;
     }
 
     .photoBooth{
       background: black;
+      padding: 30px;
+      overflow: hidden;
     }
 
     .webcam{
       border: 1px solid white;
+      width: 400px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .flipped{
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+
+    button{
+      background: #cecece;
+      padding: 20px;
+      border: none;
+      text-transform: uppercase;
+      margin: 20px 15px 0 0;
+    }
+
+    button:hover{
+      background: black;
+      color: white;
     }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
   <script>
     app = {};
 
@@ -70,6 +152,11 @@
      });
     }
 
+    app.playSnap = function(){
+      var audio = $('.snap-sound')[0];
+      audio.play();
+    }
+
     app.takePhoto = function() {
       /* The next four lines set the canvas to the same size as the video */
       var width = $(app.video).width();
@@ -80,21 +167,61 @@
       // 5. Then we "draw" the video (one frame) to the canvas
       // get the context and store it in a variable
       var ctx = app.canvas.getContext('2d');
+
+      if($('.webcam').hasClass('flipped')){
+        ctx.translate(width,0);
+        ctx.scale(-1,1);
+      }
+
       ctx.drawImage(app.video,0,0,width,height);
 
       // 6. Then we convert that canvas to a "data blob"  which is like an image src
       var data = app.canvas.toDataURL('image/jpeg');
 
       // 7.  -  1. create an image 2. set the source the be the data 3. append to an element
-      var img = `'<a href='${data}' download='gosh-to-handsome.jpg'><img src='${data}'></a>`;
+      var img = `<a href='${data}' download='gosh-to-handsome.jpg'><img src='${data}'></a>`;
+
+      app.playSnap();
 
       $('.strip').append(img);
 
+      var $stop_counter = $( ".strip a" );
+
+      // Make the image draggable
+      $('.strip a').draggable({
+        //on stop remove the thing you were just dragging;
+        // stop: function(){
+        //     $(this).remove();
+        // }
+      });
     }
 
+    app.showFlash = function(){
+      $('.webcam').addClass('flash');
+      setTimeout(function(){
+        $('.webcam').removeClass('flash');        
+      }, 300);
+    }
 
     $(function() {
-      app.getVideo();
+      app.getVideo();        
+
+      $('.shoot').on('click', function(){
+        app.showFlash();    
+        app.takePhoto();
+      });
+
+      $('.flip').on('click',  function(){
+        $('.webcam').toggleClass('flipped');
+      });
+
+    $('.trash').droppable({
+      drop: function(event , ui){
+        $(this).addClass('ui-state-highlight');        
+      }
+    });
+
+
     });
 
   </script>

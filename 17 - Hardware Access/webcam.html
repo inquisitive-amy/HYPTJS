@@ -17,8 +17,20 @@
       display: none;
     }
 
+    .strip{
+      background: #cecece;
+    }
+
     .strip img {
       width:400px;
+    }
+
+    .photoBooth{
+      background: black;
+    }
+
+    .webcam{
+      border: 1px solid white;
     }
   </style>
 
@@ -27,24 +39,32 @@
     app = {};
 
     // 1. grab the video element with jQuery and store it in app.video
-    
+    app.video = $('.webcam')[0];
+
     // 2. grab the canvas with jquery and store it in app.canvas
-    
+    app.canvas = $('.photo')[0];
+
 
     app.getVideo = function() {
       console.log("get video called");
       // Vendor prefix so it works on all browsers in the future all browsers will get navigator.getUserMedia().
       navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
-      navigator.getUserMedia({ video: true,  audio: false }, function(localMediaStream) {
-        console.log(app.video);
-        // 3. set the video source with window.URL.createObjectURL
-        
-        // 4. play the video!
-        
+      navigator.getUserMedia({ 
+        video: true,  
+        audio: false }, 
+        //this is the code that happens when the users gives you access
+        function(localMediaStream) {
+          console.log(app.video);
 
+          // 3. set the video source with window.URL.createObjectURL
+          app.video.src = window.URL.createObjectURL(localMediaStream);
+
+          // 4. play the video!
+          app.video.play();
       },
       // errorCallback
+      // this is the function that runs if the user does NOT give you access
       function(err) {
         console.log("The following error occured: " + err);
      });
@@ -58,12 +78,17 @@
       app.canvas.height = height;
 
       // 5. Then we "draw" the video (one frame) to the canvas
-
+      // get the context and store it in a variable
+      var ctx = app.canvas.getContext('2d');
+      ctx.drawImage(app.video,0,0,width,height);
 
       // 6. Then we convert that canvas to a "data blob"  which is like an image src
-
+      var data = app.canvas.toDataURL('image/jpeg');
 
       // 7.  -  1. create an image 2. set the source the be the data 3. append to an element
+      var img = `'<a href='${data}' download='gosh-to-handsome.jpg'><img src='${data}'></a>`;
+
+      $('.strip').append(img);
 
     }
 

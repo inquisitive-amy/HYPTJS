@@ -8,22 +8,26 @@ The things we learn today are definitely advanced. So, while you won't be expect
 
 A new part of HTML5 includes something called getUserMedia() which allows you to access the users microphone and webcam. While this topic is fairly advanced, getting started with is pretty easy.
 
-Before we can work with getUserMedia() we need to be running a server on our computer. 
+Before we can work with getUserMedia() we need to be running a server on our computer. There are a number of different servers you can use including MAMP and Sublime Server. My favourite quick server is called browser-sync. It requires a few steps to get setup, but once you have it installed, it's very easy to get running. 
 
-Follow these instructions very carefully:
-
-1. Install the Sublime Text package called SublimeServer. Tools → Command Palette → Type install and hit enter → search for SublimeServer and hit enter.
-2. open today's __folder__ in Sublime Text. The _entire folder_, not just the file. 
-3. Open the command palette again, and type **Start Server**, hit enter
-4. Visit <http://localhost:8080> and find the file you are looking for. 
-
-You are now accessing your files through a local server, which allows us to use getUserMedia()
+1. Make sure you have Node.js installed — <http://Nodejs.org>
+2. Open a terminal window
+	* On OSX it's `Applications` → `Utilities` → `Terminal`
+	* On Windows it's a program called `Powershell`
+3. Type `npm install browser-sync -g`
+	* OSX users might need to run `sudo npm install browser-sync -g`
+4. We need to move to today's folder in the terminal.
+	* Type `cd ` and then drag+drop today's folder into your terminal. Press enter.
+	* ![](http://wes.io/gZzx/content)
+5. Type `pwd` to make sure you are in the right folder
+6. To run the server, paste `browser-sync start --directory --server --directory --files "*.js, *.html, *.css"` into the terminal and the server should open
 
 Let's do a code-along together to make a photo booth! Open `webcam.html`
 
 # Today's Exercises
 
-1. Take the start of our photobooth and style it to look like an acutal photo booth:
+1. Take the start of our photobooth and style it to look like an actual photo booth. 
+	2. Here is an example: <https://wesbos.com/demos/photobooth/>	
 	1. There should be a button you can click to take a photo
 	3. Style the output as a film strip and camera input
 	4. Have a button to flip the camera

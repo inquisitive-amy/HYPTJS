@@ -11,19 +11,31 @@
 <p>The things we learn today are definitely advanced. So, while you won&#39;t be expected to know how to code any of this from scratch,  it&#39;s helpful to take a look into advanced stuff to see what is possible. </p>
 <h1 id="webcam-microphone-access">Webcam &amp; Microphone Access</h1>
 <p>A new part of HTML5 includes something called getUserMedia() which allows you to access the users microphone and webcam. While this topic is fairly advanced, getting started with is pretty easy.</p>
-<p>Before we can work with getUserMedia() we need to be running a server on our computer. </p>
-<p>Follow these instructions very carefully:</p>
+<p>Before we can work with getUserMedia() we need to be running a server on our computer. There are a number of different servers you can use including MAMP and Sublime Server. My favourite quick server is called browser-sync. It requires a few steps to get setup, but once you have it installed, it&#39;s very easy to get running. </p>
 <ol>
-<li>Install the Sublime Text package called SublimeServer. Tools → Command Palette → Type install and hit enter → search for SublimeServer and hit enter.</li>
-<li>open today&#39;s <strong>folder</strong> in Sublime Text. The <em>entire folder</em>, not just the file. </li>
-<li>Open the command palette again, and type <strong>Start Server</strong>, hit enter</li>
-<li>Visit <a href="http://localhost:8080">http://localhost:8080</a> and find the file you are looking for. </li>
+<li>Make sure you have Node.js installed — <a href="http://Nodejs.org">http://Nodejs.org</a></li>
+<li>Open a terminal window<ul>
+<li>On OSX it&#39;s <code>Applications</code> → <code>Utilities</code> → <code>Terminal</code></li>
+<li>On Windows it&#39;s a program called <code>Powershell</code></li>
+</ul>
+</li>
+<li>Type <code>npm install browser-sync -g</code><ul>
+<li>OSX users might need to run <code>sudo npm install browser-sync -g</code></li>
+</ul>
+</li>
+<li>We need to move to today&#39;s folder in the terminal.<ul>
+<li>Type <code>cd</code> and then drag+drop today&#39;s folder into your terminal. Press enter.</li>
+<li><img src="http://wes.io/gZzx/content" alt=""></li>
+</ul>
+</li>
+<li>Type <code>pwd</code> to make sure you are in the right folder</li>
+<li>To run the server, paste <code>browser-sync start --directory --server --directory --files &quot;*.js, *.html, *.css&quot;</code> into the terminal and the server should open</li>
 </ol>
-<p>You are now accessing your files through a local server, which allows us to use getUserMedia()</p>
 <p>Let&#39;s do a code-along together to make a photo booth! Open <code>webcam.html</code></p>
 <h1 id="today-s-exercises">Today&#39;s Exercises</h1>
 <ol>
-<li>Take the start of our photobooth and style it to look like an acutal photo booth:<ol>
+<li>Take the start of our photobooth and style it to look like an actual photo booth. <ol>
+<li>Here is an example: <a href="https://wesbos.com/demos/photobooth/">https://wesbos.com/demos/photobooth/</a>    </li>
 <li>There should be a button you can click to take a photo</li>
 <li>Style the output as a film strip and camera input</li>
 <li>Have a button to flip the camera</li>

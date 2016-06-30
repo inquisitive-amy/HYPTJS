@@ -9,6 +9,7 @@
 <body>
 
   <audio class="snap-sound" src="snap.mp3"></audio>
+  <audio class="trash-sound" src="foley_paper_thrown_bin.mp3"></audio>
 
 
   <div class="photoBooth">
@@ -157,6 +158,11 @@
       audio.play();
     }
 
+    app.playTrash = function(){
+      var trashSound = $('.trash-sound')[0];
+      trashSound.play();
+    }
+
     app.takePhoto = function() {
       /* The next four lines set the canvas to the same size as the video */
       var width = $(app.video).width();
@@ -217,7 +223,9 @@
 
     $('.trash').droppable({
       drop: function(event , ui){
-        $(this).addClass('ui-state-highlight');        
+        $(this).addClass('ui-state-highlight').find();        
+        ui.draggable.remove();
+        app.playTrash();        
       }
     });
 

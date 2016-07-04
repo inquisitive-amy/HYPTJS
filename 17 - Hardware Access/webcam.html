@@ -69,15 +69,27 @@
       margin-top: 20px;
     }
 
-    .strip > a {
+    .strip > .shot {
         max-width: 100px;
         float: left;
         display: block;
         margin: 5px 1%;
+        position: relative; 
     }
 
     .strip img{
       max-width: 100%;
+    }
+
+    .strip .fa-trash{
+     padding: 0;
+     font-size: 16px;
+     float: right;
+    }
+
+    .strip .fa-download{
+      font-size: 16px;
+      color: green;
     }
 
     .photoBooth{
@@ -100,6 +112,10 @@
         transform: scaleX(-1);
         filter: FlipH;
         -ms-filter: "FlipH";
+    }
+
+    .trash-active{
+      background: red;
     }
 
     button{
@@ -163,6 +179,10 @@
       trashSound.play();
     }
 
+    // app.deletePhoto = function(){
+    //     var image = $(this).addClass('found');
+    // };
+
     app.takePhoto = function() {
       /* The next four lines set the canvas to the same size as the video */
       var width = $(app.video).width();
@@ -184,8 +204,16 @@
       // 6. Then we convert that canvas to a "data blob"  which is like an image src
       var data = app.canvas.toDataURL('image/jpeg');
 
+      var trashLink = $('<a href="#"></a>)');
+      trashLink.addClass('fa fa-trash');
+
+      var downloadLink = $(`<a href='${data}' download='gosh-to-handsome.jpg'></a>`);
+      downloadLink.addClass('fa fa-download');
+
       // 7.  -  1. create an image 2. set the source the be the data 3. append to an element
-      var img = `<a href='${data}' download='gosh-to-handsome.jpg'><img src='${data}'></a>`;
+      var img = $(`<div class="shot"><img src='${data}'></img></div>`);
+
+      img.append(trashLink,downloadLink);
 
       app.playSnap();
 
@@ -195,10 +223,8 @@
 
       // Make the image draggable
       $('.strip a').draggable({
-        //on stop remove the thing you were just dragging;
-        // stop: function(){
-        //     $(this).remove();
-        // }
+        revert: "invalid",
+        cursor: "move"
       });
     }
 
@@ -222,12 +248,17 @@
       });
 
     $('.trash').droppable({
+      activeClass: "trash-active",  
       drop: function(event , ui){
-        $(this).addClass('ui-state-highlight').find();        
         ui.draggable.remove();
         app.playTrash();        
       }
     });
+
+    // $('.strip .fa-trash').on('click', function(e){
+    //     e.preventDefault();
+    //     app.deletePhoto();
+    // });
 
 
     });

@@ -75,6 +75,7 @@
         display: block;
         margin: 5px 1%;
         position: relative; 
+        background:rgba(255,255,255,0.25);
     }
 
     .strip img{
@@ -89,7 +90,7 @@
 
     .strip .fa-download{
       font-size: 16px;
-      color: green;
+      color: lightblue;
     }
 
     .photoBooth{
@@ -145,7 +146,7 @@
 
 
     app.getVideo = function() {
-      console.log("get video called");
+      // console.log("get video called");
       // Vendor prefix so it works on all browsers in the future all browsers will get navigator.getUserMedia().
       navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
@@ -179,9 +180,10 @@
       trashSound.play();
     }
 
-    // app.deletePhoto = function(){
-    //     var image = $(this).addClass('found');
-    // };
+    app.deletePhoto = function(photo){
+        photo.closest('.shot').remove();
+        app.playTrash();
+    };
 
     app.takePhoto = function() {
       /* The next four lines set the canvas to the same size as the video */
@@ -211,7 +213,7 @@
       downloadLink.addClass('fa fa-download');
 
       // 7.  -  1. create an image 2. set the source the be the data 3. append to an element
-      var img = $(`<div class="shot"><img src='${data}'></img></div>`);
+      var img = $(`<div class="shot"><img class="booth-photo" src='${data}'></img></div>`);
 
       img.append(trashLink,downloadLink);
 
@@ -222,7 +224,7 @@
       var $stop_counter = $( ".strip a" );
 
       // Make the image draggable
-      $('.strip a').draggable({
+      $('.strip .shot').draggable({
         revert: "invalid",
         cursor: "move"
       });
@@ -255,10 +257,12 @@
       }
     });
 
-    // $('.strip .fa-trash').on('click', function(e){
-    //     e.preventDefault();
-    //     app.deletePhoto();
-    // });
+    $(document).on('click', '.shot .fa-trash' , function(e){
+        e.preventDefault();
+        var photo = $(this);
+        
+        app.deletePhoto(photo);
+    });
 
 
     });

@@ -22,10 +22,24 @@
   <div class="buttons">
     <button class="flip">Flip</button>
     <button class="shoot">Take Photo</button>
-    <button class="timer">5s</button>
+    <button class="timer" data-time="5">5s</button>
+    <button class="timer" data-time="10">10s</button>
   </div>
 
+  <div class="countdown-timer"></div>
+
   <style>
+
+  .countdown-timer{
+    display: none;
+    background: red;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    z-index: 1000;
+    color: white;
+  }
 
   .trash{
     width: 100px;
@@ -145,6 +159,9 @@
     app.canvas = $('.photo')[0];
 
 
+    // app.timer = $(['data-time']);
+
+
     app.getVideo = function() {
       // console.log("get video called");
       // Vendor prefix so it works on all browsers in the future all browsers will get navigator.getUserMedia().
@@ -237,6 +254,21 @@
       }, 300);
     }
 
+    // app.countdownTimer = function(timerData){
+    //   console.log(timerData);
+
+    //   var counter = 0;
+
+    //   var interval = setInterval(function(){
+    //       setTimer();
+    //   }, 1000);
+
+    //   function setTimer(){
+    //     $('.countdown-timer').show().html(timerData);
+    //       counter--;
+    //   }
+    // }
+
     $(function() {
       app.getVideo();        
 
@@ -257,10 +289,16 @@
       }
     });
 
+    $('.timer').on('click', function(e){
+        e.preventDefault();        
+        var timerData = $(this).data('time');
+
+        // app.countdownTimer(timerData);
+    });
+
     $(document).on('click', '.shot .fa-trash' , function(e){
         e.preventDefault();
-        var photo = $(this);
-        
+        var photo = $(this);    
         app.deletePhoto(photo);
     });
 

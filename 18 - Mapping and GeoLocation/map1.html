@@ -22,24 +22,82 @@
   <div class="map"></div>  
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <!-- javascript library for working with google maps-->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKzsrNffRB7lWrjzT82n3157NkVPzcIeI"></script>
+
+
 
   <script>
     var app = {};
 
+
+    // navigator.geolocation.getCurrentPosition(function(position) {
+
+    //   var coords = position.coords;
+    //   var lat = coords.latitude;
+    //   var lng = coords.longitude;
+
+    // }, function(err){
+    //   //Console an error if they deny their position
+    //   console.error("they didn't get you", err);
+    // });
+
+
     app.loadMap = function() {
+
       // 1. all the options for the google map are held in an object
 
-      // 2. we also select the map div with jquery, but only the first item in the array
+      var mapStyle = [
+      {"featureType":"water","elementType":"geometry","stylers":[{"color":"#193341"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#2c5a71"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#29768a"},{"lightness":-37}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#406d80"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#406d80"}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#3e606f"},{"weight":2},{"gamma":0.84}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"weight":0.6},{"color":"#1a3541"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#2c5a71"}]}
+      ]
 
-      // 3. which we then pass to the map method and store 
+      var options = {
+        zoom : 10,
+        center: {
+          lat: 43.648,
+          lng: -79.398
+        },
+        styles: mapStyle
+      }
+
+
+      // 2. we also select the map div with jquery, but only the first item in the array
+      var div = document.querySelector('.map');
       
-    
+      // 3. which we then pass to the map method and store in a propert
+      app.map = new google.maps.Map(div,options);
+      
     } // end app.loadMap definition
+
+    app.loadMarkers = function(){
+      var myLatlng = new google.maps.LatLng(43.648,-79.398);
+
+      //create a marker for our home
+      var home = new google.maps.Marker({
+        position: myLatlng,
+        map: app.map,
+        animation: google.maps.Animation.DROP
+      });
+
+      //create an info window
+      // an info winow is a blank popup box
+      var infoWindow = new google.maps.InfoWindow();
+
+      //when someone clicks home show then an InfoWindow
+      // get something, on click, 
+      google.maps.event.addListener(home,'click', function(){
+        infoWindow.setContent('Crock Rock');
+        infoWindow.open(app.map , home);
+      });
+    }
 
 
     $(function() {
       // 4. call load map when the document is ready
+      app.loadMap();
+      // 5. then call load markers to add the marker to the map thats already been created.
+      app.loadMarkers();
 
     }); // end doc ready
 

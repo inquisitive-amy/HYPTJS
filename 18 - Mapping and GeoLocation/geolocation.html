@@ -6,10 +6,44 @@
 </head>
 <body>
 
+<h1></h1>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
+
+  	// Geolocation call back function 
+  	// Get your current position and upon success 
+  	// get the coordinates, lat, long, and accuracy
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position);
+
+	  var coords = position.coords;
+	  var lat = coords.latitude;
+	  var lng = coords.longitude;
+	  var accuracy = coords.accuracy;
+	  var message = `You are located at lat:${lat} lng: ${lng} accuracy: ${accuracy}  meters`;
+
+      $('h1').html(message);
+
+
+    }, function(err){
+    	//Console an error if they deny their position
+    	console.error("they didn't get you", err);
     });
+
+
+  	//Watch Position callbackfunction 
+  	// is used to register a handler function that will be called 
+  	// automatically each time the position of the device changes
+    // navigator.geolocation.watchPosition(function(position) {
+    //   console.log(position);
+
+    //   var coords = position.coords;
+    //   var lat = coords.lat;
+    //   var long = coords.lon;
+
+    //   var message = 'you are now at ';
+    //   $('h1').html(message + lat + long);
+    // });
   </script>
   
 </body>

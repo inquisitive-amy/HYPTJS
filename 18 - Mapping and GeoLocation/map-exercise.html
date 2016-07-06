@@ -70,8 +70,8 @@
 	app.loadMarkers = function(myLat,myLng){
 
 		// Destination 1
-		var destLatlng = new google.maps.LatLng(43.6538442,-79.3817544);
-		var home = new google.maps.Marker({
+		var destLatlng = new google.maps.LatLng(43.6544421,-79.3828934);
+		var eatonCentre = new google.maps.Marker({
 		  position: destLatlng,
 		  map: app.map,
 		  animation: google.maps.Animation.DROP
@@ -100,13 +100,13 @@
 		var infoWindow = new google.maps.InfoWindow();
 
 		//when someone clicks home show then an InfoWindow get something, on click, 
-		google.maps.event.addListener(home,'click', function(){
-		  infoWindow.setContent('test');
+		google.maps.event.addListener(eatonCentre,'click', function(){
+		  infoWindow.setContent('You are at the Eaton Centre' + '<img src="ec.jpeg" alt="CN Tower">' );
 		  infoWindow.open(app.map , this);
 		});
 
 		google.maps.event.addListener(currentLocation,'click',function(){
-			infoWindow.setContent('you are located at ');
+			infoWindow.setContent('you are located here');
 			infoWindow.open(app.map, this);
 		});
 

@@ -25,6 +25,9 @@
 		<p class="feels"></p>
 		<h3 class="icon-name"></h3>
 		<img src="" alt="" class="icon">
+
+		<p class="location"></p>
+		<div id="map"></div>
 	</div>
 
 	<div class="beer-ex">
@@ -63,11 +66,23 @@
 				// console.log('feesl like: ' + feelslike);
 				// // this is a payload -- a bunch of data you can work with
 
+				var city = currently.display_location.city;
+				var country = currently.display_location.country;
+				var state = currently.display_location.state;
+
+				var location = currently.observation_location;
+				var lat = location.latitude;
+				var lng = location.longitude;
+
 				var message = `It is ${weather} and it feels like ${feelslike}`;
+				var message1 = `You are in ${city} , ${state}, ${country}. `;
 				var message2 = 	`The wind is ${wind}`;
-				$('.weather-alert').html(message + message2);
+
+				//messages
+				$('.weather-alert').html(message1 + message + message2);
 				$('.icon').attr('src' , iconUrl);
 				$('.icon-name').html(iconTitle);
+				$('.location').html(lat + lng);
 
 			}
 		});

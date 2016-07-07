@@ -5,18 +5,126 @@
 	<title>My First AJAX Request</title>
 </head>
 <body>
-	<p>Open up your console to see how the request went.</p>
+<style>
+	.beers,
+	.map-example{
+		float: left;
+		width: 50%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.beer-ex{
+		border-top: 2px solid black;
+		padding-top: 50px;
+	}
+</style>
+	<div class="weather">
+		<h2>Wunderground Exercises</h2>
+		<p class="weather-alert"></p>
+		<p class="feels"></p>
+		<h3 class="icon-name"></h3>
+		<img src="" alt="" class="icon">
+	</div>
+
+	<div class="beer-ex">
+		<h2>Beer Exercises</h2>
+		<ul class="beers"></ul>
+		<ul class="map-example"></ul>
+	</div>
+	
+	<!-- load google api ajax library-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script>
 	$(function(){
+		// a cont can't be changed
+		const key = '61f0a55cb00602dc';
+		var endpoint = `http://api.wunderground.com/api/${key}/conditions/q/Ontario/Toronto.json`;
+
+
+		// 1. Convenience method for ajax request
 		$.ajax({
-			url: 'http://api.wunderground.com/api/61f0a55cb00602dc/conditions/q/Ontario/Toronto.json',
+			url: endpoint,
 			type: 'GET',
-			dataType: 'json',
-			success: function(){
-				console.log("It worked!");
+			//change dataType to jsonp if you get an error
+			dataType: 'jsonp',
+
+			// success callback function that passes data
+			success: function(data){
+				console.log(data.current_observation);
+				var currently = data.current_observation;
+				// console.log('weather:' + data.current_observation);
+				var feelslike = currently.feelslike_string;
+				var weather = currently.weather;
+				var wind = currently.wind_string;
+
+				var iconUrl = currently.icon_url;
+				var iconTitle = currently.icon;
+				// console.log('feesl like: ' + feelslike);
+				// // this is a payload -- a bunch of data you can work with
+
+				var message = `It is ${weather} and it feels like ${feelslike}`;
+				var message2 = 	`The wind is ${wind}`;
+				$('.weather-alert').html(message + message2);
+				$('.icon').attr('src' , iconUrl);
+				$('.icon-name').html(iconTitle);
+
 			}
 		});
+
+
+		
+		// 2. if jsonp or cors is turned on this is an alternative
+		// way to get an ajax request
+		// if the method is get, and datatype is jsonp this is cleaner to write
+
+		// ** External function which we pass to $.getJSON instead of a callback with the function inside of it.
+
+		// create a display function that will run 
+		// when the beers come from the API
+
+
+		function displayBeer(payload){
+			
+			var listItems = ''; //blank string to append our items too		
+			
+			//use the javaSript forEach method to loop over each item in the object we are getting returned back.
+			payload.data.forEach(function(singleBeer){
+				var beerItem = `<li>${singleBeer.name}</li>`;
+				listItems = listItems + beerItem;
+			});
+
+			// then append the whole list only once
+			$('.beers').append(listItems);
+		}
+
+		function hotShotDisplay(payload){
+			var beers = payload.data;
+			console.log(beers.createDate);
+			var listItems = beers.map(function(beer){
+				return `<li>${beer.createDate}</li>`;
+			}).join('');
+			$('.map-example').append(listItems);
+		}
+
+
+		var url2 = 'http://api.react.beer/v2/search?q=hops&type=beer';
+		// $.getJSON takes 2 parameters
+		// $.getJSON(url2, function(payload){			
+		// 	//use dot notation to access properties on the data object
+		// 	console.log(payload);
+		// 	console.log(payload.data[5]);
+		// });
+
+		$.getJSON(url2, displayBeer);
+		$.getJSON(url2, hotShotDisplay);
+
+		// $('.beers').
+
+
+		// 3. Fetch is a new api in the browser
+		// It only works with CORS and not jsonp and not in all browsers
+
 	});
 	</script>
 </body>

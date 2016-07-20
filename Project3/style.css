@@ -1,0 +1,14 @@
+ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.food-list > li{
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.food-list ul > li:first-child{
+  font-weight: bold
+}

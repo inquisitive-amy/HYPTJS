@@ -8,11 +8,13 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
+  // store our ajax request in a variable - This is a promise
     var yapromise = $.ajax({
       url : 'http://api.wunderground.com/api/61f0a55cb00602dc/conditions/q/Toronto, ontario.json',
       dataType : 'JSON'
     });
 
+    // When the promise request is done, then console.log the requets data
     $.when(yapromise).done(function(weather) {
       console.log(weather);
     });

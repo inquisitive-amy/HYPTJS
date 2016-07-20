@@ -9,6 +9,7 @@ main {
   color: #fff;
 }
 
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -27,6 +28,8 @@ p.artist {
 .piece {
   width: 100%;
   clear: both;
+  border-bottom: 1px solid white;
+  overflow: hidden;
 }
 .piece img {
   float: left;
@@ -34,4 +37,10 @@ p.artist {
   margin-right: 20px;
   margin-bottom: 30px;
   border: solid 5px #fff;
+}
+
+select{
+  -webkit-appearance: none;
+  height: 31px;
+  padding: 0 10px;
 }

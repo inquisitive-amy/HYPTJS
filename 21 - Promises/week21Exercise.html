@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promises Exercise</title>
+</head>
+<style>
+  ul{
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .food-list > li{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .food-list ul > li:first-child{
+    font-weight: bold
+  }
+</style>
+<body>
+  <div class="weather"></div>
+
+  <h2>Recipes</h2>
+  <ul class="food-list"></ul>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+
+  // Create a Promises
+
+  var prom1 = $.ajax({
+    url: 'http://api.wunderground.com/api/61f0a55cb00602dc/conditions/q/Ontario/Toronto.json',
+    dataType: 'json'
+  });
+
+  var prom2 = $.ajax({
+    url: 'http://api.yummly.com/v1/api/recipes?_app_id=e02d3319&_app_key=379039ee0338958ed3ed2be6a5a82f0a',
+    dataType: 'json'
+  });
+
+  $.when(prom1,prom2).then(function(prom1data,prom2data){
+
+    var weatherData = prom1data[0].current_observation;
+    var yummlyData = prom2data[0].matches;
+    console.log(weatherData, yummlyData);
+
+
+    var listItems = [];
+
+    yummlyData.forEach(function(singleMatch){
+
+      var cookTime = singleMatch.totalTimeInSeconds/60;
+
+      var foodItem = `<li><ul><li>${singleMatch.recipeName}</li><li>${singleMatch.rating} Stars</li><li>${singleMatch.sourceDisplayName}</li><li>${cookTime} minutes</li></ul></li>`;
+      listItems = listItems + foodItem;
+    });
+
+    $('.food-list').append(listItems);
+    $('.weather').append('Feels Like : '+weatherData.feelslike_string + ' in ' + weatherData.display_location.full );
+
+  }, function(){
+    console.log(err);
+  });
+
+  </script>
+</body>
+</html>

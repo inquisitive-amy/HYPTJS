@@ -8,7 +8,7 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
-    // create our first promise
+    // create our first promise and send out our ajax request
     var p1 = $.ajax({
       url : 'http://api.wunderground.com/api/61f0a55cb00602dc/conditions/q/Toronto, ontario.json',
       dataType : 'JSON',
@@ -17,12 +17,14 @@
       }
     });
 
-    // create our second promise
+    // create our second promise and send out our ajax request
     var p2 = $.ajax({
-      url : 'http://myttc.ca/vehicles/near/queen_and_spadina.json?callback=?',
+      url : 'http://api.react.beer/v2/search?q=hops&type=beer',
       dataType : 'JSON'
     });
 
+    // multiple promises.
+    // when promise1 & promise1 comes back we run a function that returns both p1 and p2 data
     $.when(p1, p2).then(function(p1data, p2data) {
       console.log(p1data, p2data);
     });

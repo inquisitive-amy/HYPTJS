@@ -1,0 +1,324 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>1 - API_exercise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style id="mkstylesheet">
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:0.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}*{box-sizing:border-box}input,select,textarea,button{font:13px/1.4 Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"}body{font:13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";color:#333;background-color:#fff}a{color:#4078c0;text-decoration:none}a:hover,a:active{text-decoration:underline}hr,.rule{height:0;margin:15px 0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid #ddd}hr:before,.rule:before{display:table;content:""}hr:after,.rule:after{display:table;clear:both;content:""}h1,h2,h3,h4,h5,h6{margin-top:15px;margin-bottom:15px;line-height:1.1}h1{font-size:30px}h2{font-size:21px}h3{font-size:16px}h4{font-size:14px}h5{font-size:12px}h6{font-size:11px}small{font-size:90%}blockquote{margin:0}ul,ol{padding:0;margin-top:0;margin-bottom:0}ol ol,ul ol{list-style-type:lower-roman}ul ul ol,ul ol ol,ol ul ol,ol ol ol{list-style-type:lower-alpha}dd{margin-left:0}tt,code{font-family:Consolas, "Liberation Mono", Menlo, Courier, monospace;font-size:12px}pre{margin-top:0;margin-bottom:0;font:12px Consolas,"Liberation Mono",Menlo,Courier,monospace}html,body{color:black}#wrapper{font:16px helvetica,arial,freesans,clean,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;padding:3px;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border:solid 1px #dddddd !important;color:#333}p{margin:1em 0}a{color:#4183c4;text-decoration:none}#wrapper{background-color:#fff;padding:30px;margin:15px;font-size:16px;line-height:1.6}#wrapper>*:first-child{margin-top:0 !important}#wrapper>*:last-child{margin-bottom:0 !important}@media screen{#wrapper{border:solid 1px #ddd}}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4;color:#333}h1{padding-bottom:.3em;font-size:2.25em;line-height:1.2;border-bottom:1px solid #eee}h2{padding-bottom:0.3em;font-size:1.75em;line-height:1.225;border-bottom:1px solid #eee}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5{font-size:1em}h6{color:#777;font-size:1em}p,blockquote,ul,ol,dl,table,pre{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px 0;background-color:#e7e7e7;border:0 none}ul,ol{padding-left:2em}ul.no-list,ol.no-list{padding:0;list-style-type:none}ul ul,ul ol{margin-top:0;margin-bottom:0}ol ol,ol ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl{padding:0}dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0 16px;margin-bottom:16px}blockquote{padding:0 15px;margin-left:0;color:#777;border-left:4px solid #ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto}table th{font-weight:700;padding:6px 13px;border:1px solid #ddd}table td{padding:6px 13px;border:1px solid #ddd}table tr{background-color:#fff;border-top:1px solid #ccc}table tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;-moz-box-sizing:border-box;box-sizing:border-box}span.frame{display:block;overflow:hidden}span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0 auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}span.align-right span img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left span{margin:13px 0 0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,0.04);border-radius:3px}code:before,code:after{letter-spacing:-.2em;content:"\00a0"}tt:before,tt:after{letter-spacing:-.2em;content:"\00a0"}code br,tt br{display:none}del code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight pre{padding:16px;margin-bottom:0;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}pre{padding:16px;margin-bottom:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px;word-wrap:normal}pre code,pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}pre code:before,pre code:after{content:normal}pre tt:before,pre tt:after{content:normal}.poetry pre{font-family:Georgia, Garamond, serif !important;font-style:italic;font-size:110% !important;line-height:1.6em;display:block;margin-left:1em}.poetry pre code{font-family:Georgia, Garamond, serif !important;word-break:break-all;word-break:break-word;-webkit-hyphens:auto;-moz-hyphens:auto;hyphens:auto;white-space:pre-wrap}sup,sub,a.footnote{font-size:1.4ex;height:0;line-height:1;vertical-align:super;position:relative}sub{vertical-align:sub;top:-1px}@media print{body{background:#fff}img,table,figure{page-break-inside:avoid}#wrapper{background:#fff;border:none !important;font-size:12px}pre code{overflow:visible}}@media screen{body.inverted{color:#eee !important;border-color:#555;box-shadow:none}.inverted #wrapper,.inverted hr,.inverted p,.inverted td,.inverted li,.inverted h1,.inverted h2,.inverted h3,.inverted h4,.inverted h5,.inverted h6,.inverted th,.inverted .math,.inverted caption,.inverted dd,.inverted dt,.inverted blockquote{color:#eee !important;border-color:#555;box-shadow:none}.inverted td,.inverted th{background:#333}.inverted pre,.inverted code,.inverted tt{background:#eeeeee !important;color:#111}.inverted h2{border-color:#555555}.inverted hr{border-color:#777;border-width:1px !important}::selection{background:rgba(157,193,200,0.5)}h1::selection{background-color:rgba(45,156,208,0.3)}h2::selection{background-color:rgba(90,182,224,0.3)}h3::selection,h4::selection,h5::selection,h6::selection,li::selection,ol::selection{background-color:rgba(133,201,232,0.3)}code::selection{background-color:rgba(0,0,0,0.7);color:#eeeeee}code span::selection{background-color:rgba(0,0,0,0.7) !important;color:#eeeeee !important}a::selection{background-color:rgba(255,230,102,0.2)}.inverted a::selection{background-color:rgba(255,230,102,0.6)}td::selection,th::selection,caption::selection{background-color:rgba(180,237,95,0.5)}.inverted{background:#0b2531;background:#252a2a}.inverted #wrapper{background:#252a2a}.inverted a{color:#acd1d5}}.highlight{background:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k,.highlight .o{font-weight:700}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:700}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:700;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:700}.highlight .gu{color:purple;font-weight:700}.highlight .gt{color:#a00}.highlight .kc,.highlight .kd,.highlight .kn,.highlight .kp,.highlight .kr{font-weight:700}.highlight .kt{color:#458;font-weight:700}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .n{color:#333}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:700}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne,.highlight .nf{color:#900;font-weight:700}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:700}.highlight .w{color:#bbb}.highlight .mf,.highlight .mh,.highlight .mi,.highlight .mo{color:#099}.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .se,.highlight .sh,.highlight .si,.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc,.highlight .vg,.highlight .vi{color:teal}.highlight .il{color:#099}.highlight .gc{color:#999;background-color:#EAF2F5}.type-csharp .highlight .k,.type-csharp .highlight .kt{color:blue}.type-csharp .highlight .nf{color:#000;font-weight:400}.type-csharp .highlight .nc{color:#2b91af}.type-csharp .highlight .nn{color:#000}.type-csharp .highlight .s,.type-csharp .highlight .sc{color:#a31515}.type-csharp .highlight .k,.type-csharp .highlight .kt{color:#00F}.type-csharp .highlight .nf{color:#000;font-weight:normal}.type-csharp .highlight .nc{color:#2B91AF}.type-csharp .highlight .nn{color:#000}.type-csharp .highlight .s,.type-csharp .highlight .sc{color:#A31515}body.dark #wrapper{background:transparent !important;box-shadow:none !important}
+#mkreplaced-toc{list-style-position:inside;padding:0;margin:0 0 0 1rem;list-style-type:none}#mkreplaced-toc li::before{content:''}#mkreplaced-toc li{font-size:1.5rem;line-height:1.5;font-weight:normal}#mkreplaced-toc li ul{font-size:1.3rem;font-weight:300;padding:.5rem 0;margin:0 0 0 1rem}#mkreplaced-toc li.missing{list-style-type:none !important}#mkreplaced-toc.max-1 ul,#mkreplaced-toc.max1 ul{display:none}#mkreplaced-toc.max-2 ul ul,#mkreplaced-toc.max2 ul ul{display:none}#mkreplaced-toc.max-3 ul ul ul,#mkreplaced-toc.max3 ul ul ul{display:none}#mkreplaced-toc.max-4 ul ul ul ul,#mkreplaced-toc.max4 ul ul ul ul{display:none}#mkreplaced-toc.max-5 ul ul ul ul ul,#mkreplaced-toc.max5 ul ul ul ul ul{display:none}.rtl{direction:rtl;text-align:right}@media print{body{background:white;line-height:1.4}html,body,#wrapper{max-width:100%;width:100%;-webkit-text-size-adjust:none;-webkit-perspective:none !important;box-sizing:border-box;width:auto;border:0;margin:0;padding:0;float:none;-moz-box-shadow:none !important;-webkit-box-shadow:none !important;box-shadow:none !important}mark{background:transparent !important}h1,h2,h3,h4,h5,h6{page-break-after:avoid}p,h2,h3{orphans:3;widows:3}section{page-break-before:avoid}#generated-toc,#firstdiff,#toc-title,#mkdocumentprogress,#mkincludechart,#mkprogressbar1,#mkprogressbar2,.mkscrollmeter,#alllinks,.popup{display:none !important}.suppressprintlinks a{color:inherit !important;text-decoration:none !important;border-bottom:none !important;cursor:default !important}.hrefafterlinktext #wrapper a:link:after,.hrefafterlinktext #wrapper a:visited:after{content:" (" attr(href) ") ";font-size:90%;opacity:0.9}.nocodebreak pre{page-break-inside:avoid}img,table,figure{page-break-inside:avoid}.breakfootnotes .footnotes{page-break-before:always}.breakfootnotes .footnotes hr{display:none}#mktoctitle{display:block}#print-title{display:block;border-bottom:solid 1px #666}#wrapper pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}#wrapper #generated-toc-clone,#wrapper #mkreplaced-toc{display:block}.task-list .task-list-item{list-style-type:none !important}.task-list .task-list-item-checkbox{-webkit-appearance:none;position:relative}.task-list .task-list-item-checkbox:before{content:' ';border:solid 1px #aaa;width:1em;height:1em;display:block;border-radius:2px;left:-20px;top:-1em;position:absolute}}
+#wrapper #generated-toc-clone, #wrapper #mkreplaced-toc, #wrapper #generated-toc-clone ul, #wrapper #mkreplaced-toc ul {
+    list-style-position: inside;
+}
+#wrapper #generated-toc-clone li.missing, #wrapper #mkreplaced-toc li.missing {
+    list-style-type: none!important;
+}
+#wrapper #generated-toc-clone, #wrapper #mkreplaced-toc {
+    list-style-type: decimal-leading-zero;
+}
+#wrapper #generated-toc-clone>li>ul, #wrapper #mkreplaced-toc>li>ul  {
+    list-style-type: decimal;
+}
+#wrapper #generated-toc-clone>li>ul>li>ul, #wrapper #mkreplaced-toc>li>ul>li>ul {
+    list-style-type: square;
+}
+#wrapper #generated-toc-clone>li>ul>li>ul>li>ul, #wrapper #mkreplaced-toc>li>ul>li>ul>li>ul {
+    list-style-type: disc;
+}
+#wrapper #generated-toc-clone>li>ul>li>ul>li>ul>li>ul, #wrapper #mkreplaced-toc>li>ul>li>ul>li>ul>li>ul {
+    list-style-type: disc;
+}
+#wrapper #generated-toc-clone>li>ul>li>ul>li>ul>li>ul>li>ul, #wrapper #mkreplaced-toc>li>ul>li>ul>li>ul>li>ul>li>ul {
+    list-style-type: disc;
+}
+
+</style>
+
+<style id="mkprintstyles">@media print{#wrapper #generated-toc-clone,#generated-toc{display:none!important;}h1:nth-of-type(n+2){page-break-before:always;}
+html,body,#wrapper{font-size:10pt!important;}
+}
+</style>
+
+
+</head>
+<body class="normal firstload">
+  <div id="wrapper">
+      <h1 id="apiexercise">API Exercise</h1>
+
+<p>Today we're going to build a small JavaScript app that uses the Rijksmuseum API to search for artwork. Download the starter files in <strong>art-app-start</strong> and open up <code>app.js</code> in Sublime Text and <code>index.html</code> in Chrome.</p>
+
+<h1 id="phase1:artwithmonkeys">Phase 1: Art with Monkeys</h1>
+
+<p>To get started, let's build some functionality to retrieve artwork with monkeys in it. </p>
+
+<h2 id="setupyourappstructure">Setup your app structure</h2>
+
+<p>The first step is to create an object for our app:</p>
+<pre><code class="(null)">var artApp = {};</code></pre>
+
+<p>Every app needs an <code>init</code> function that will get things started, so let's create one. We'll fill in the code to run on init later.</p>
+<pre><code class="(null)">artApp.init = function(){
+  //code to kick off app goes here
+};</code></pre>
+
+<p>Since the <code>init</code> function is everything that needs to run on page load, let's call it inside a jQuery doc ready.</p>
+<pre><code class="(null)">$(function(){
+  artApp.init();
+});</code></pre>
+
+<p>Test that you have no syntax errors in your code.</p>
+
+<h2 id="testtherequests">Test the requests</h2>
+
+<p>The first thing we'll want to get working is making the API request and ensuring we're getting the expected data back.</p>
+
+<ol>
+<li>Make a jQuery ajax request to get museum pieces</li>
+<li>Print the response data to the console</li>
+</ol>
+
+<p>The API calls will require an API key. Instead of repeating this every request, let's create a property to hold the key. </p>
+<pre><code class="(null)">artApp.key = &quot;#####&quot;;</code></pre>
+
+<p>Let's also create a new app method that will make the AJAX request to get art pieces. It'll be called inside our <code>init</code> function.</p>
+<pre><code class="(null)">artApp.init = function(){
+  artApp.getPieces();
+};</code></pre>
+<pre><code class="(null)">artApp.getPieces = function(){
+  //AJAX request for art pieces goes here
+};</code></pre>
+
+<p>Inside of the <code>getPieces</code> function we'll make our AJAX request and log the results.</p>
+<pre><code class="(null)">artApp.getPieces = function(){
+  $.ajax({
+    url: &apos;https://www.rijksmuseum.nl/api/en/collection&apos;,
+    type: &apos;GET&apos;,
+    data: {
+      key: artApp.apikey,
+      format: &apos;jsonp&apos;
+    },
+    dataType: &apos;jsonp&apos;,
+    success: function(result){
+      console.log(result);
+    }
+  });
+}</code></pre>
+
+<p>Note that we're using <code>artApp.apikey</code> for the <code>key</code> parameter, and <code>jsonp</code> for both <code>format</code> and <code>dataType</code>. We then log the result to see what the data looks like.</p>
+
+<p>Check to see you get back a result object in the console. Note that the actual art data is contained inside the <code>artObjects</code> property.</p>
+
+<p>Refine your log message to only show the <code>artObjects</code> data and verify the output.</p>
+<pre><code class="(null)">console.log(result.artObjects);</code></pre>
+
+<h2 id="makeourrequestfindonlyimageswithmonkeys">Make our request find only images with monkeys</h2>
+
+<p>Now that we've got the basic API call working, let's refine our request a bit.</p>
+
+<p>The Rijksmusuem API allows us to submit a search query along with our request. To search for art pieces with monkeys, add the <code>q</code> parameter with a value of <code>monkey</code> to the data object in the request.</p>
+<pre><code class="(null)">data: {
+  key: artApp.apikey,
+  format: &apos;jsonp&apos;,
+  q: &apos;monkey&apos;
+},</code></pre>
+
+<p>Check your console to verify that you're getting a different set of results.</p>
+
+<h2 id="outputtheresultsonthepage">Output the results on the page</h2>
+
+<p>We're getting data, great! Now let's try and get it to show up on the page.</p>
+
+<p>Create a new <code>displayPieces</code> method that will handle parsing the result object and displaying it on the page. It takes a single parameter, a data object.</p>
+<pre><code class="(null)">artApp.displayPieces = function(data){
+    //put art stuff on the page
+};</code></pre>
+
+<p>We'll want the <code>displayPieces</code> method to run <em>after</em> the API call has succeeded. Update the success callback in <code>getPieces</code> to call <code>displayPieces</code>, instead of logging the results. Make sure you pass the results data as an argument.</p>
+<pre><code class="(null)">success: function(result){
+    //console.log(result.artObjects);
+    artApp.displayPieces(result.artObjects);
+}</code></pre>
+
+<p>Let's now fill in the details of <code>displayPieces</code>. We want to work through all the results data, one piece at a time. We can do that with jQuery's <code>$.each()</code> method. It's like a for loop but specially meant for looping over a collection of things - in our case, the art data. </p>
+<pre><code class="(null)">artApp.displayPieces = function(data){
+  $.each(data, function(i, piece){
+    console.log(piece);
+  });
+};</code></pre>
+
+<p>Check to see that your <code>$.each()</code> method is working correctly by logging out a single art piece's data.</p>
+
+<h3 id="buildingthehtml">Building the HTML</h3>
+
+<p>We want our HTML output to look like this:</p>
+<pre><code class="(null)">&lt;div class=&quot;piece&quot;&gt;
+  &lt;h2&gt;Title of Art Piece&lt;/h2&gt;
+  &lt;p class=&quot;artist&quot;&gt;Artist Name&lt;/p&gt;
+  &lt;img src=&quot;url-to-image&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Let's take a look at a single piece's data in the console to see how we can get the info we need: </p>
+
+<figure>
+<img src="https://i.cloudup.com/92tuZgBhos.png" alt="" />
+</figure>
+
+<ul>
+<li>title can be found in <code>piece.title</code></li>
+<li>artist name is found in <code>piece.principaolOrFirstMaker</code></li>
+<li>img url is found in <code>piece.webImage.url</code></li>
+</ul>
+
+<p>Inside the <code>$.each</code>, function we'll generate that HTML with the following code.</p>
+<pre><code class="(null)">var title = $(&apos;&lt;h2&gt;&apos;).text(piece.title);
+var artist = $(&apos;&lt;p&gt;&apos;).addClass(&apos;artist&apos;).text(piece.principalOrFirstMaker);
+var image = $(&apos;&lt;img&gt;&apos;).attr(&apos;src&apos;, piece.webImage.url;
+var artPiece = $(&apos;&lt;div&gt;&apos;).addClass(&apos;piece&apos;).append(image, title, artist);</code></pre>
+
+<p>Note that by passing an element tag like <code>&lt;h2&gt;</code> into <code>$()</code>, we can create a new DOM node. We do that for the heading, paragraph, image and container div, then use <code>append</code> to insert the heading, paragraph and image into the container. We can also use the usual jQuery methods like <code>addClass</code> and <code>text</code> to customize the nodes.</p>
+
+<p>Finally, we append the completed <code>artPiece</code> divs into the DOM.</p>
+<pre><code class="(null)">$(&apos;#artwork&apos;).append(artPiece);</code></pre>
+
+<p>Your completed <code>displayPieces</code> function should look like this:</p>
+<pre><code class="(null)">artApp.displayPieces = function(data){
+  $.each(data, function(i, piece){
+    console.log(piece);
+    var title = $(&apos;&lt;h2&gt;&apos;).text(piece.title);
+    var artist = $(&apos;&lt;p&gt;&apos;).addClass(&apos;artist&apos;).text(piece.principalOrFirstMaker);
+    var image = $(&apos;&lt;img&gt;&apos;).attr(&apos;src&apos;, piece.webImage.url);
+    var artPiece = $(&apos;&lt;div&gt;&apos;).addClass(&apos;piece&apos;).append(image, title, artist);
+    $(&apos;#artwork&apos;).append(artPiece);
+  });
+};</code></pre>
+
+<p>Test your code to see if your artwork shows up on the page! </p>
+
+<p>The completed phase 1 code is <a href="exercises/art-app-phase1-answer.zip">here</a> if you need a clean slate before moving on to phase 2.</p>
+
+<h1 id="chooseyouranimal">Phase 2: Art with</h1>
+
+<p>Let's make this app more useful and allow user input to change the API results! It will look like <a href="exercises/art-app-answer/index.html">this</a> when we're done.</p>
+
+<h2 id="addauicontrolfortheuser">Add a UI control for the user</h2>
+
+<p>To get started, let's give the user a way to pick an animal. Add this select element markup to your HTML file on line 12:</p>
+<pre><code class="(null)">&lt;label for=&quot;animal&quot;&gt;Choose your animal:&lt;/label&gt;
+&lt;select name=&quot;animal&quot; id=&quot;animal&quot;&gt;
+    &lt;option value=&quot;monkey&quot;&gt;Monkeys&lt;/option&gt;
+    &lt;option value=&quot;eagle&quot;&gt;Eagles&lt;/option&gt;
+    &lt;option value=&quot;dragon&quot;&gt;Dragons&lt;/option&gt;
+    &lt;option value=&quot;elephant&quot;&gt;Elephants&lt;/option&gt;
+    &lt;option value=&quot;centaur&quot;&gt;Centaur&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+<h2 id="makeourrequestmoreversatile">Make our request more versatile</h2>
+
+<p>We also need a way to change the search query in our request. Let's update our <code>getPieces</code> method to accept a single parameter, a search query. Add the parameter <code>query</code> to the function definition, and change the request to use <code>query</code> instead of <code>monkey</code>.</p>
+<pre><code class="(null)">artApp.getPieces = function(query){
+    $.ajax({
+        /* ... ajax options... */
+        data: {
+          key: artApp.apikey,
+          format: &apos;jsonp&apos;,
+          q: query
+        },
+        /* ...more ajax options... */
+    )};
+};</code></pre>
+
+<p>We'll also have to update anywhere this function is being called, so in our <code>init</code> function, <code>artApp.getPieces()</code> becomes:</p>
+<pre><code class="(null)">artApp.getPieces(&apos;monkey&apos;);</code></pre>
+
+<p>Verify that your app still shows artwork with monkeys in it.</p>
+
+<h2 id="hookuptheuserinputtothequery">Hook up the user input to the query</h2>
+
+<p>We need to take whatever animal the user picks and use the selection to make a new query. </p>
+
+<p>Select elements will fire a <code>change</code> event when a new selection is made. The <code>init</code> function is a good place to put event handlers, so let's add one there:</p>
+<pre><code class="(null)">$(&quot;#animal-select&quot;).on(&quot;change&quot;, function(){
+    console.log(&quot;new animal selected&quot;);
+});</code></pre>
+
+<p>Test that your change handler is working. If it is, remove or comment out that log message.</p>
+
+<p>Next, let's find which animal the user selected with jQuery's <code>.val()</code> method.</p>
+<pre><code class="(null)">var animal = $(this).val();
+console.log(animal);</code></pre>
+
+<p>Test that your code logs the selected animal. If it does, remove or comment out that log message.</p>
+
+<p>Finally, let's make a new request to the API based on the new animal choice. Remember, our <code>getPieces</code> method is what makes the request, so we need to call that with the new animal choice as an argument.</p>
+<pre><code class="(null)">var animal = $(this).val();
+artApp.getPieces(animal);</code></pre>
+
+<p>We expect our app to:
+1. load the page with art with monkeys
+2. make a new request to the API when the user selects an animal
+3. display the new results</p>
+
+<p>Let's see if that worked.</p>
+
+<h3 id="wherearemynewanimals">Where are my new animals??</h3>
+
+<p>It looks like our code isn't doing what we expected but there are no errors. Let's check the network tab to see if our new request is being made.</p>
+
+<p>It is! So what's happening? If you scroll down the page, you'll find that the new animals are in fact there, but they're after the old ones. We can fix this bug by clearing out the <code>#artwork</code> div before adding new art pieces.</p>
+
+<p>Right before we run <code>displayPieces</code>, let's clear <code>#artwork</code> with jQuery's <code>.empty()</code></p>
+<pre><code class="(null)">$(&apos;#artwork&apos;).empty():
+artApp.displayPieces(result);</code></pre>
+
+<p>Check to see if your new animals show up where you expect them to.</p>
+
+<h2 id="enhancetheuibyupdatingthetitle">Enhance the UI by updating the title</h2>
+
+<p>Now that we've got new animals loading in, &quot;Art with Monkeys&quot; is no longer an appropriate title. Let's use jQuery to update that too.</p>
+
+<p>Let's create a new method that updates the title. We should be able to pass in a new subject that will replace &quot;Monkeys&quot;.</p>
+<pre><code class="(null)">artApp.updateTitle = function(subject){
+    //change title to include &apos;subject&apos; here
+};</code></pre>
+
+<p>We need an HTML hook to target the word &quot;Monkeys&quot; specifically, so let's wrap in in a span.</p>
+<pre><code class="(null)">&lt;h1 id=&quot;page-title&quot;&gt;Art with &lt;span&gt;Monkeys&lt;/span&gt;&lt;/h1&gt; </code></pre>
+
+<p>Fill in the details of our <code>updateTitle</code> method so that it finds the span and replaces &quot;Monkeys&quot; with the new animal name.</p>
+<pre><code class="(null)">artApp.updateTitle = function(subject){
+  $(&quot;#page-title&quot;).find(&quot;span&quot;).text(subject);
+};</code></pre>
+
+<p>Finally, let's call <code>updateTitle</code> after the new animal has been selected, passing it the selected animal.</p>
+<pre><code class="(null)">$(&apos;#animal-select&apos;).on(&quot;change&quot;, function(){
+  var animal = $(this).val();
+  artApp.updateTitle(animal);
+  artApp.getPieces(animal);
+});</code></pre>
+
+<p>Check to see that your title has changed. It has! But there's a little problem. We're getting the uncapitalized input value <code>eagle</code>, not the friendly label, <code>Eagles</code>.</p>
+
+<p>We can get the friendly label by using the <code>:selected</code> pseudo selector to search for the selected option in the drop-down.</p>
+<pre><code class="(null)">var animalName = $(this).find(&apos;:selected&apos;).text();
+artApp.updateTitle(animalName);</code></pre>
+
+<p>Test your code one last time to make sure the title gets updated properly.</p>
+
+<p>And that's it! We made an app that searches for artwork with animals in it! The completed code for the app is available.</p>
+
+<h2 id="morepossibilities">More possibilities</h2>
+
+<p>Some other ideas to think about to enhance our app:</p>
+
+<ul>
+<li>modify the img url to generate thumbnail sized images (see <a href="http://rijksmuseum.github.io/demos/">http://rijksmuseum.github.io/demos/</a>)</li>
+<li>use the pagination parameters and a 'Load More' button to allow the user to display additional results</li>
+<li>make another request to the Collection Details endpoint to display more information like colour palattes</li>
+<li>use the Tiles endpoint to create a <a href="http://upload.wikimedia.org/wikipedia/commons/a/a5/Batgirl.gif">sliding puzzle game</a></li>
+</ul>
+<script>(function(factory){if(typeof define==="function"&&define.amd){define("bidi_helpers",[],factory)}else{window.bidi_helpers=factory()}})(function(){var module={};module.Dir={RTL:-1,UNKNOWN:0,LTR:1};module.Format={LRE:"\u202A",RLE:"\u202B",PDF:"\u202C",LRM:"\u200E",RLM:"\u200F"};module.ltrChars_="A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF\u2C00-\uFB1C\uFE00-\uFE6F\uFEFD-\uFFFF";module.rtlChars_="\u0591-\u07FF\uFB1D-\uFDFF\uFE70-\uFEFC";module.ltrDirCheckRe_=new RegExp("^[^"+module.rtlChars_+"]*["+module.ltrChars_+"]");module.ltrCharReg_=new RegExp("["+module.ltrChars_+"]");module.hasAnyLtr=function(text){return module.ltrCharReg_.test(text)};module.rtlDirCheckRe_=new RegExp("^[^"+module.ltrChars_+"]*["+module.rtlChars_+"]");module.rtlRe=module.rtlDirCheckRe_;module.isRtlText=function(text){return module.rtlDirCheckRe_.test(text)};module.isLtrText=function(text){return module.ltrDirCheckRe_.test(text)};module.isRequiredLtrRe_=/^http:\/\/.*/;module.hasNumeralsRe_=/\d/;module.estimateDirection=function(text,detectionThreshold){var rtlCount=0;var totalCount=0;var hasWeaklyLtr=false;var tokens=text.split(/\s+/);for(var i=0;i<tokens.length;i++){var token=tokens[i];if(module.isRtlText(token)){rtlCount++;totalCount++}else{if(module.isRequiredLtrRe_.test(token)){hasWeaklyLtr=true}else{if(module.hasAnyLtr(token)){totalCount++}else{if(module.hasNumeralsRe_.test(token)){hasWeaklyLtr=true}}}}}return totalCount==0?(hasWeaklyLtr?module.Dir.LTR:module.Dir.UNKNOWN):(rtlCount/totalCount>detectionThreshold?module.Dir.RTL:module.Dir.LTR)};return module});(function(factory){if(typeof define==="function"&&define.amd){define("bidiweb",["bidi_helpers"],factory)}else{window.bidiweb=factory(bidi_helpers)}})(function(bidi_helpers){var module={};var IProcessor={makeRtl:function(element){},makeLtr:function(element){}};var css_processor=function(classes){return{makeRtl:function(element){element.classList.add(classes.rtl)},makeLtr:function(element){element.classList.add(classes.ltr)}}};var style_processor=function(falign){return{makeRtl:function(element){element.style.direction="rtl";if(falign){element.style.textAlign="right"}},makeLtr:function(element){element.style.direction="ltr";if(falign){element.style.textAlign="left"}}}};module.processors={css:css_processor,style:style_processor};var nodeListMock=function(node){var list=[node];list.item=function(i){return list[i]};return list};module.process=function(query,processor){var elements;if(query instanceof NodeList){elements=query}else{if(query instanceof Node){elements=nodeListMock(query)}else{elements=document.querySelectorAll(query)}}module.process_elements(elements,processor);return elements};module.process_elements=function(elements,processor){for(var index=0;index<elements.length;index++){var element=elements.item(index);var text=element.textContent||element.value||element.placeholder||"";var dir=bidi_helpers.estimateDirection(text,0.4);if(dir==bidi_helpers.Dir.RTL){processor.makeRtl(element)}else{if(dir==bidi_helpers.Dir.LTR){processor.makeLtr(element)}}}};module.process_css=function(query,classes){var proc=module.processors.css(classes);return module.process(query,proc)};module.process_style=function(query,falign){var proc=module.processors.style(falign);return module.process(query,proc)};module.style=function(query){return module.process_style(query,true)};module.css=function(query){return module.process_css(query,{rtl:"rtl",ltr:"ltr"})};module.htmlToElement=function(html){var container=document.createElement("div");container.innerHTML=html;return container};module.html_css=function(html){var container=module.htmlToElement(html);var nodes=container.querySelectorAll("*");module.css(nodes);return container.innerHTML};module.html_style=function(html){var container=module.htmlToElement(html);var nodes=container.querySelectorAll("*");module.style(nodes);return container.innerHTML};return module});</script>
+<!-- ##END MARKED WRAPPER## -->
+    </div>
+</body>
+</html>

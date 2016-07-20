@@ -1,0 +1,34 @@
+ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/*.food-list{
+	display: flex;
+	flex-wrap: wrap;
+}*/
+
+.test-item{
+	width: 100px;
+	height: 100px;
+	background: black;
+}
+
+h2 span{
+	background: SeaShell;
+	padding: 0 5px;
+}
+
+.food-list > li{
+/*	display: flex-item;
+	flex-direction: row;*/
+	float: left;
+	width: 200px;
+	padding: 10px;
+	background: SeaShell;
+	border: 2px solid white;
+}
+
+.food-list ul > li:first-child{
+  font-weight: bold
+}

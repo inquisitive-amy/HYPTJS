@@ -40,6 +40,78 @@
 
   <script>
     // lets go
+    //select the canvas 
+
+    var canvas = $('.draw')[0];
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'mistyrose';
+    ctx.fillRect(50,50,100,100);
+    ctx.fillRect(150,10,100,100);
+
+    $('[name="color"]').on('change', function(){
+      ctx.strokeStyle = $(this).val();
+    });
+
+     $('[name="width"]').on('change', function(){
+      ctx.lineWidth = $(this).val();
+    });
+
+    ctx.strokeStyle = $('[name="color"]').val();
+    ctx.lineWidth = $('[name="width"]').val();
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    var $draw = $('.draw');
+
+    // variable outside of the mousemove event to store info to
+    var lastEvent;
+
+    // add a mouseDown variable to check for
+    var mouseDown = false;
+
+    $draw.on('mousemove', function(e){
+
+        //if the mouse is not currently down, skip this function
+      if(!mouseDown){
+          // if you call return the code below wont run.
+          return;
+      }
+
+      //if this is this first time running, stor the event and end it
+      if(!lastEvent){
+        lastEvent = e;
+        return;
+      }
+
+      //start the path
+      ctx.beginPath();
+      ctx.moveTo(lastEvent.offsetX, lastEvent.offsetY);
+
+      //find out where the cursor is right now
+      ctx.lineTo(e.offsetX , e.offsetY);
+
+      //add stroke
+      ctx.stroke();
+      ctx.closePath();
+      
+      //Move current event and store it in the lastEvent variable
+      lastEvent = e;
+    });
+
+    //flag variables
+    $draw.on('mousedown', function(e){
+        mouseDown = true;
+        lastEvent = e;
+    });
+    $draw.on('mouseup', function(){
+        mouseDown = false;
+    });
+
+
+
+
+
   </script>
 
 </body>

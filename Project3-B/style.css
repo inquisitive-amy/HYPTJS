@@ -1,16 +1,14 @@
+html, body { height: 100%; }
+
+
 ul{
   list-style-type: none;
   padding-left: 0;
 }
 
-/*.food-list{
-	display: flex;
-	flex-wrap: wrap;
-}*/
-
 .test-item{
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 	background: black;
 }
 
@@ -19,16 +17,168 @@ h2 span{
 	padding: 0 5px;
 }
 
-.food-list > li{
-/*	display: flex-item;
-	flex-direction: row;*/
+.food-container{
 	float: left;
-	width: 200px;
+}
+
+.food-container,
+.shopping-container{
+	width: 48%;
+	box-sizing: border-box;
+}
+
+.shopping-container{
+	border: 1px solid black;
 	padding: 10px;
-	background: SeaShell;
+	float: right;
+}
+
+.food-list{
+	margin: 0;
+	height: 100%
+}
+
+.food-list > li.grid-item{
+	width: 150px;
+	padding: 10px;
 	border: 2px solid white;
+	box-sizing: border-box;
+	background-color: SeaShell;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .food-list ul > li:first-child{
   font-weight: bold
+}
+
+.fa-clock-o:before{
+	padding-right: 5px;
+}
+
+.grid-item p,
+.grid-item h3{
+	font-size: 14px;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+.wrapper{
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+}
+
+.modal{
+	position: relative;
+}
+
+.modal.active{
+	display: block;
+	position: fixed;
+	background-color: black;
+	color: white;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	padding: 30px;
+	font-size: 18px;
+	z-index: 2;
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+
+.shop{
+	padding: 10px;
+	color: white;
+	border: 1px solid white;
+	text-decoration: none
+}
+
+
+.modal img,
+.fa.fa-times,
+.shop,
+.ingredients{
+	display: none
+}
+
+.fa.fa-times{
+	display: none;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.modal .active img,
+.modal.active .fa-times,
+.modal.active .ingredients,
+.modal.active .shop{
+	display: inline-block;
+}
+
+.modal.active .fa-plus{
+	display: none;
+}
+
+p.ingredients{
+	font-size: 20px;
+}
+
+body.popup:before{
+	content: "";
+	z-index: 1;
+	background: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.ingredient-link{
+	margin-top: 20px;
+	text-transform: uppercase;
+}
+
+.ingredient-link:hover{
+	cursor: pointer;
+}
+
+.time-button{
+	margin-bottom: 20px;
+}
+
+.shopping-list > li{
+	border: 1px solid #cecece;
+	padding: 5px;
+	margin-bottom: 2px;
+	background: white;
+}
+
+.shopping-list > li:hover{
+	background: SeaShell;
+}
+
+.shopping-list > li > span{
+	float: right;
+}
+
+.shopping-list > li > span:hover{
+	cursor: pointer;
+}
+
+.cart{
+	float: right;
+	padding-top: 10px;
+}
+
+.fa-shopping-cart:before{
+	font-size: 25px;
 }

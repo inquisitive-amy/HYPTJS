@@ -7,33 +7,74 @@
 </head>
 
 <body>
-  <h1 class="time"></h1>
-  <h2 class="meal-time">Time for a <span></span> Recipe</h2>
-  <div class="buttons">
-    <button data-course="Breakfast and Brunch">Breakfast and Brunch</button>
-    <button data-course="Lunch">Lunch</button>
-    <button data-course="Snacks">Snacks</button>
-    <button data-course="Main Dishes">Main Dishes</button>
-    <button data-course="Desserts">Desserts</button>
-    <button data-course="">All Courses</button>
+  <div class="wrapper">
+    <div class="cart" aria-hidden="true">
+      <span class="qty">0</span>
+      <i class="fa fa-shopping-cart"></i>
+    </div>
+    <h1 class="time"></h1>
+    <h2 class="meal-time">Time for a <span></span> Recipe</h2>
+    <div class="buttons">
+      <button data-course="Breakfast and Brunch">Breakfast and Brunch</button>
+      <button data-course="Lunch">Lunch</button>
+      <button data-course="Snacks">Snacks</button>
+      <button data-course="Main Dishes">Main Dishes</button>
+      <button data-course="Desserts">Desserts</button>
+      <button data-course="Random">Random</button>
+    </div>
+
+    <div class="time-button">
+      <p>Filter by Time</p>
+      <button>shortest</button>
+      <button>longest</button>
+    </div>
+    
+    <div class="food-container">
+      <ul class="food-list"></ul>
+    </div>
+
+    <div class="shopping-container">
+      <h2>Shopping List</h2>
+      <ul class="shopping-list"></ul>
+    </div>
   </div>
 
-  <div class="time-button">
-    <p>Filter by Time</p>
-    <button>shortest</button>
-    <button>longest</button>
-  </div>
-  <ul class="food-list"></ul>
-  
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+
   <!-- Load jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <!-- jQuery UI -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <!-- Load Javascript library for working with google maps-->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKzsrNffRB7lWrjzT82n3157NkVPzcIeI"></script>
 
     <!-- load Isotope -->
   <script src="isotope.pkgd.js"></script>
+  <script src="fit-column.js"></script>
+
+  <!-- fontawesome -->
+  <script src="https://use.fontawesome.com/2e8901468a.js"></script>
 
   <script src="scripts.js"></script>
 </body>
 </html>
+
+
+<!-- <li class="grid-item">
+  <div>
+  <p>${recipeName}</p>
+  <p class="number fa fa-clock-o">${cookTime}</p>
+  <p>${whichCourse}</p>
+    <div class="modal">
+      <h3 class="ingredient-link">Ingredients 
+        <i class="fa fa-plus"></i>
+      </h3>
+      <p class="ingredients">${ingredients}</p>
+      <i class="fa fa-times"></i>
+      <a href="#">Add to Shopping List</a>
+    </div>
+  </div>
+</li> -->

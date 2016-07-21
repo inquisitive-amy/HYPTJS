@@ -1,5 +1,16 @@
   // Create a referece to firebase
-  var messagesRef = new Firebase('https://hackeryou.firebaseio.com/chat');
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDwSZis0M6r1vf6QL1EX4HWi588kNevQ5s",
+    authDomain: "hackeryou-88892.firebaseapp.com",
+    databaseURL: "https://hackeryou-88892.firebaseio.com",
+    storageBucket: "hackeryou-88892.appspot.com",
+  };
+
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+  var chat = database.ref('/chat');
 
   // C.R.E.A.M -  cache your elements
   var messageField = $('#messageInput');
@@ -18,25 +29,25 @@
       text : messageField.val()
     }
     // Save Data to firebase
-    messagesRef.push(message);
+    chat.push(message);
     // clear message field
     messageField.val('');
 
   });
 
   // Add a callback that is triggered for each chat message
-  // this is kind of like an Ajax request 
-  messagesRef.limitToLast(10).on('child_added', function (snapshot) {
-    
-    // Get data from returned 
-    var data = snapshot.val();
+  // this is kind of like an Ajax request
+  chat.limitToLast(10).on('child_added', function (data) {
+
+    // Get data from returned
+    var data = data.val();
     var username = data.name || 'anonymous';
     var message = data.text;
 
     // Create an element
     var nameElement = $('<strong>').text(username);
     var messageElement = $('<li>').text(message).prepend(nameElement);
-    
+
     // Add the message to the DOM
     messageList.append(messageElement)
 

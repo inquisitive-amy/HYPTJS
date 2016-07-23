@@ -8,34 +8,46 @@
 
 <body>
   <div class="wrapper">
-    <div class="cart" aria-hidden="true">
-      <span class="qty">0</span>
-      <i class="fa fa-shopping-cart"></i>
+    <div class="header">
+      <div class="wishlist-list">
+        <i id="wishlist_toggle" class="fa fa-heart"></i>
+        <ul class="wishlist-container"></ul>
+      </div>
+      <div class="cart" aria-hidden="true">
+        <span class="qty">0</span>
+        <i id="mini-cart" class="fa fa-shopping-basket"></i>
+      </div>
+      <div class="shopping-container">
+        <h2>Shopping List</h2>
+        <ul class="shopping-list"></ul>
+        <p class="empty"></p>
+      </div>
     </div>
+
     <h1 class="time"></h1>
-    <h2 class="meal-time">Time for a <span></span> Recipe</h2>
+    <h2 class="meal-time">Time for some <span></span></h2>
     <div class="buttons">
       <button data-course="Breakfast and Brunch">Breakfast and Brunch</button>
       <button data-course="Lunch">Lunch</button>
       <button data-course="Snacks">Snacks</button>
       <button data-course="Main Dishes">Main Dishes</button>
       <button data-course="Desserts">Desserts</button>
-      <button data-course="Random">Random</button>
+    </div>
+
+    <div class="search">
+      <label for="search">Or search for a recipe using ingredients you have</label>
+      <input type="text" id="search" placeholder="e.g. eggs, milk, apples">
+      <button class="button" id="submit_search" type="submit">Search</button>
     </div>
 
     <div class="time-button">
-      <p>Filter by Time</p>
-      <button>shortest</button>
-      <button>longest</button>
+      <p>Sort by Cooking Time</p>
+      <button class="button" data-time="true">shortest</button>
+      <button class="button" data-time="false">longest</button>
     </div>
     
     <div class="food-container">
       <ul class="food-list"></ul>
-    </div>
-
-    <div class="shopping-container">
-      <h2>Shopping List</h2>
-      <ul class="shopping-list"></ul>
     </div>
   </div>
 

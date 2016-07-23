@@ -1,5 +1,14 @@
 html, body { height: 100%; }
 
+.header{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	padding: 10px;
+	box-sizing: border-box;
+	z-index: 1;
+}
 
 ul{
   list-style-type: none;
@@ -17,20 +26,108 @@ h2 span{
 	padding: 0 5px;
 }
 
+.grid-item p.title{
+	font-size: 12px;
+}
+
+.wishlist{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.wishlist:hover + .tooltip{
+	display: block;
+}
+
+.tooltip{
+	background: gray;
+	color: white;
+	display: none;
+	position: absolute;
+	font-size: 12px;
+	padding: 5px;
+	top: 0 ;
+	left: 0;
+}
+
+.wishlist-list{
+	float: right;
+	padding: 10px 0 0 20px;
+	font-size: 20px;
+	position: relative;
+}
+
+.wishlist-container{
+	display: none;
+	position: absolute;
+	width: 200px;
+	padding: 10px;
+	border: 1px solid black;
+	right: 10px;
+	max-height: 150px;
+	background: white;
+	overflow-y: scroll;
+}
+
+.wishlist-container.active{
+	display: block;
+}
+
+.wishlist-container .name{
+	font-size: 10px;
+}
+
+p.title span{
+	padding: 5px;
+	font-size: 12px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+    display: inline-block;
+    margin-right: 2px;
+    background: black;
+    color: SeaShell;
+    text-transform: lowercase;
+}
+
+.modal.active p.title{
+	font-size: 0;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.modal.active p.title span{
+	background: SeaShell;
+    color: black;
+}
+
 .food-container{
-	float: left;
+	margin-top: 20px;
 }
 
 .food-container,
 .shopping-container{
-	width: 48%;
 	box-sizing: border-box;
 }
 
 .shopping-container{
+	display: none;
+	position: absolute;
+	width: 300px;
+	max-height: 300px;
+	overflow-y: scroll;
 	border: 1px solid black;
 	padding: 10px;
 	float: right;
+	top: 65px;
+	right: 10px;
+	background: white;
+}
+
+.shopping-container.active {
+	display: block;
 }
 
 .food-list{
@@ -102,7 +199,15 @@ body{
 }
 
 
-.modal img,
+.item-img{
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	margin-top: 10px;
+	background-size: cover;
+}
+
 .fa.fa-times,
 .shop,
 .ingredients{
@@ -116,7 +221,6 @@ body{
 	right: 10px;
 }
 
-.modal .active img,
 .modal.active .fa-times,
 .modal.active .ingredients,
 .modal.active .shop{
@@ -145,10 +249,15 @@ body.popup:before{
 .ingredient-link{
 	margin-top: 20px;
 	text-transform: uppercase;
+	border: 1px solid black;
+	padding: 5px;
+	border-radius: 3px;
 }
 
 .ingredient-link:hover{
 	cursor: pointer;
+	color: white;
+	background: black;
 }
 
 .time-button{
@@ -179,6 +288,46 @@ body.popup:before{
 	padding-top: 10px;
 }
 
-.fa-shopping-cart:before{
+.fa-shopping-basket:hover{
+	cursor: pointer;
+}
+
+.fa-shopping-basket:before{
 	font-size: 25px;
+}
+
+.fa-shopping-basket.active:before{
+	color: red;
+}
+
+
+/*Search*/
+
+.search{
+	margin-top: 20px;
+}
+
+.search label{
+	display: block;
+	margin-bottom: 20px
+}
+
+.search input{
+	height: 30px;
+	padding: 0 10px;
+	font-size: 16px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.button{
+	background:black;
+	color: white;
+	text-transform: uppercase;
+	border: 0;
+	height: 30px;
+	vertical-align: middle;
+	padding: 0 20px;
+	vertical-align: middle;
+	display: inline-block;
 }

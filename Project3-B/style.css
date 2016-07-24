@@ -5,9 +5,19 @@ html, body { height: 100%; }
 	width: 100%;
 	left: 0;
 	top: 0;
-	padding: 10px;
+	padding: 30px 10px;
 	box-sizing: border-box;
 	z-index: 1;
+	background: white
+}
+.meal-buttons{
+	margin-top: 80px;
+}
+.meal-time{
+	position: absolute;
+    width: 100%;
+    margin: 0;
+    z-index: -1
 }
 
 ul{
@@ -53,7 +63,7 @@ h2 span{
 
 .wishlist-list{
 	float: right;
-	padding: 10px 0 0 20px;
+	padding-left: 20px;
 	font-size: 20px;
 	position: relative;
 }
@@ -285,7 +295,6 @@ body.popup:before{
 
 .cart{
 	float: right;
-	padding-top: 10px;
 }
 
 .fa-shopping-basket:hover{
@@ -330,4 +339,8 @@ body.popup:before{
 	padding: 0 20px;
 	vertical-align: middle;
 	display: inline-block;
+}
+
+.button.active{
+	background: darkgray;
 }

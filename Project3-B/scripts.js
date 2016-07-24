@@ -216,7 +216,7 @@ app.init = function(){
 
   app.updateTimeMsg(course);
 
-  $('.buttons button').on('click', function(e){
+  $('.meal-buttons button').on('click', function(e){
       e.preventDefault();
       buttonVal = $(this).data('course');
       app.getYumlyData(buttonVal ,'standard');
@@ -247,6 +247,9 @@ app.init = function(){
     e.preventDefault();
     var sortBool = $(this).data('time');
     app.callIsotope(sortBool);
+
+    $(this).toggleClass('active');
+    $(this).siblings('.button').toggleClass('active');
   })
 
   // Submit Search Query to Yummly

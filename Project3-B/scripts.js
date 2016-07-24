@@ -25,18 +25,48 @@ app.getCourse = function(time){
 
 app.grid = $('.food-list');
 
-app.callIsotope = function(sorting){
-    app.grid.isotope({
-      itemSelector: '.grid-item',
-      masonry: {
-        columnWidth: 50
-      },
+// To sort by cook time
+app.sortIsotope = function(sorting){
+  console.log('sortIsotope');
+  app.grid.isotope({
       getSortData: {
         number: '.number parseInt'
       },
       sortBy : 'number',
       sortAscending : sorting
-    });
+  });
+}
+
+// To append new items on page load and on search
+app.appendListItems = function(listItems){
+  console.log('append');
+
+  app.grid.append(listItems);
+
+  app.grid.isotope({
+    itemSelector: '.grid-item',
+    masonry: {
+      columnWidth: 50
+    },
+    getSortData: {
+      number: '.number parseInt'
+    },
+    sortBy : 'number',
+    sortAscending : true    
+  });
+
+}
+
+app.newSearch = function(listItems){
+  app.clearResults();
+  app.grid.isotope('insert', $(listItems));
+  app.grid.isotope();
+}
+
+app.clearResults = function(){
+  console.log('clear');
+  var elements = $('.food-list > li');
+  app.grid.isotope('remove', elements);
 }
 
 
@@ -75,8 +105,6 @@ app.searchRecipes = function(query){
 // Get YummlyData
 app.getYumlyData = function(options , searchType){
 
-  console.log(searchType);
-
   // Determine which request to use
   if(searchType === 'standard' ){
     var promiseRecipe = app.getRecipes(options);
@@ -90,6 +118,14 @@ app.getYumlyData = function(options , searchType){
 
     console.log(recipes);
 
+    // Check if there are any matched reults or not
+    if(recipes.length === 0 ){
+     $('.food-container').append('<p class="no-results">No reciepies matched your resuts, please try again</p>');
+    }else{
+      $('.food-container .no-results').remove();
+    }
+
+    // Create a list of the matching results
     var recipeList = [];
 
     recipes.forEach(function(eachRecipe){
@@ -103,26 +139,19 @@ app.getYumlyData = function(options , searchType){
 
       var ingredientCount = ingredients.length;
 
-      var item = `<li class="grid-item"><div><span class="wishlist fa fa-heart-o"></span><span class="tooltip">Add to Favourites</span><span class="item-img"style="background-image:url(${imageURL})"></span><p class="name">${recipeName}</p><p class="number fa fa-clock-o">${cookTime}</p><p>${whichCourse}</p><div class="modal"><h3 class="ingredient-link">Ingredients <i class="fa fa-plus"></i></h3><p class="title"><span class="counter">${ingredientCount}</span> ingredients</p><p class="ingredients">${ingredientList}</p><i class="fa fa-times"></i><a class="shop" href="#">Add to Shopping List</a></div></div></li>`
+      var item = `<li class="grid-item"><div><span class="wishlist fa fa-heart-o"></span><span class="tooltip">Add to Favourites</span><span class="item-img"style="background-image:url(${imageURL})"></span><p class="name">${recipeName}</p><p class="number fa fa-clock-o">${cookTime}</p><p>${whichCourse}</p><div class="modal"><h3 class="ingredient-link">Ingredients <i class="fa fa-plus"></i></h3><p class="title"><span class="counter">${ingredientCount}</span> ingredients</p><p class="ingredients">${ingredientList}</p><i class="fa fa-times"></i><a class="shop" href="#">Add to Shopping List</a></div></div></li>`;
 
       recipeList = recipeList + item;
     }); // end foreach loop
 
-    var isoOptions = {
-        itemSelector: '.grid-item',
-        masonry: {
-            columnWidth: 50
-        },
-        getSortData: {
-          number: '.number parseInt'
-        },
-        sortBy : 'number'
-    } 
+
+    if($('.food-list li').length > 0){      
+      app.newSearch(recipeList)
+    }else{
+      app.appendListItems(recipeList);
+    }
+
     
-    app.grid.empty().append(recipeList);
-
-    app.callIsotope(true);
-
   });/// end of .when()
 
 }// end app.getYumlyData()
@@ -246,7 +275,9 @@ app.init = function(){
   $('.time-button button').on('click', function(e){
     e.preventDefault();
     var sortBool = $(this).data('time');
-    app.callIsotope(sortBool);
+
+    //Use isotope sort
+    app.sortIsotope(sortBool);
 
     $(this).toggleClass('active');
     $(this).siblings('.button').toggleClass('active');
@@ -269,7 +300,12 @@ app.init = function(){
 
    $('#wishlist_toggle').on('click', function(){
       app.wishlistToggle();
-   })
+   });
+
+   $('#clear_list').on('click', function(e){
+      e.preventDefault();
+      app.clearResults();
+   });
 
 };
 

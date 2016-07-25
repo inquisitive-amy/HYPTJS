@@ -1,4 +1,7 @@
-html, body { height: 100%; }
+html, body { 
+	height: 100%; 
+	background: black;
+}
 
 .header{
 	position: fixed;
@@ -10,9 +13,11 @@ html, body { height: 100%; }
 	z-index: 1;
 	background: white
 }
+
 .meal-buttons{
-	margin-top: 80px;
+	margin-top: 100px;
 }
+
 .meal-time{
 	position: absolute;
     width: 100%;
@@ -32,8 +37,9 @@ ul{
 }
 
 h1 span{
-	background: SeaShell;
+	background: #FF4136;
 	padding: 0 5px;
+	color:white;
 }
 
 .grid-item p.title{
@@ -44,6 +50,7 @@ h1 span{
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	color: #FF4136;
 }
 
 .wishlist:hover + .tooltip{
@@ -88,6 +95,10 @@ h1 span{
 	font-size: 10px;
 }
 
+p.name{
+	font-weight: bold;
+}
+
 p.title span{
 	padding: 5px;
 	font-size: 12px;
@@ -109,8 +120,8 @@ p.title span{
 }
 
 .modal.active p.title span{
-	background: SeaShell;
-    color: black;
+	background: black;
+    color: white;
 }
 
 .food-container{
@@ -131,7 +142,7 @@ p.title span{
 	border: 1px solid black;
 	padding: 10px;
 	float: right;
-	top: 65px;
+	top: 85px;
 	right: 10px;
 	background: white;
 }
@@ -150,7 +161,9 @@ p.title span{
 	padding: 10px;
 	border: 2px solid white;
 	box-sizing: border-box;
-	background-color: SeaShell;
+	background-color: white;
+	border: 1px solid #cecece;
+	margin-bottom: 10px;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -168,7 +181,9 @@ p.title span{
 	font-size: 14px;
 }
 
-body{
+body,
+input,
+button{
 	margin: 0;
 	padding: 0;
 	font-family: 'Lato', sans-serif;
@@ -188,7 +203,7 @@ body{
 .modal.active{
 	display: block;
 	position: fixed;
-	background-color: black;
+	background-color: #FF4136;
 	color: white;
 	left: 50%;
 	top: 50%;
@@ -205,7 +220,11 @@ body{
 	padding: 10px;
 	color: white;
 	border: 1px solid white;
-	text-decoration: none
+	text-decoration: none;
+}
+
+.shop:hover{
+	background: black;
 }
 
 
@@ -216,6 +235,7 @@ body{
 	display: inline-block;
 	margin-top: 10px;
 	background-size: cover;
+	box-shadow: 1px 1px 1px #cecece;
 }
 
 .fa.fa-times,
@@ -241,6 +261,17 @@ body{
 	display: none;
 }
 
+.modal.active h3.ingredient-link{
+	border: 0;
+	font-size: 16px;
+}
+
+.modal.active h3.ingredient-link:hover{
+	cursor: default;
+	background:transparent;
+	margin: 0;
+}
+
 p.ingredients{
 	font-size: 20px;
 }
@@ -256,12 +287,17 @@ body.popup:before{
 	width: 100%;
 }
 
-.ingredient-link{
+.number{
+	font-weight: bold
+}
+
+h3.ingredient-link{
 	margin-top: 20px;
 	text-transform: uppercase;
 	border: 1px solid black;
 	padding: 5px;
 	border-radius: 3px;
+	font-size: 10px;
 }
 
 .ingredient-link:hover{
@@ -272,6 +308,7 @@ body.popup:before{
 
 .time-button{
 	margin-bottom: 20px;
+	color: white;
 }
 
 .shopping-list > li{
@@ -282,7 +319,7 @@ body.popup:before{
 }
 
 .shopping-list > li:hover{
-	background: SeaShell;
+	background: #FF4136;
 }
 
 .shopping-list > li > span{
@@ -306,7 +343,7 @@ body.popup:before{
 }
 
 .fa-shopping-basket.active:before{
-	color: red;
+	color: #FF4136;
 }
 
 
@@ -318,7 +355,8 @@ body.popup:before{
 
 .search label{
 	display: block;
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	color: white;
 }
 
 .search input{
@@ -330,8 +368,9 @@ body.popup:before{
 }
 
 .button{
-	background:black;
-	color: white;
+	background:white;
+	color: black;
+	font-weight: bold;
 	text-transform: uppercase;
 	border: 0;
 	height: 30px;
@@ -339,10 +378,17 @@ body.popup:before{
 	padding: 0 20px;
 	vertical-align: middle;
 	display: inline-block;
+	margin: 5px;
+}
+
+.button:hover{
+	background: #cecece;
+	cursor: pointer;
 }
 
 .button.active{
 	background: darkgray;
+	color: #cecece;
 }
 
 

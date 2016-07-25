@@ -1,9 +1,9 @@
 var app = {};
 
-
 // Get the time of day
 app.date = new Date();
 app.hour = app.date.getHours();
+app.grid = $('.food-list');
 
 
 //  Use time to determine a Course - specifically yummly parameters
@@ -23,9 +23,10 @@ app.getCourse = function(time){
     return meal;
 }
 
-app.grid = $('.food-list');
+/// Store the retun from yummly in a promise and pass it a course
+app.course = app.getCourse(app.hour);
 
-// To sort by cook time
+// Sort recipies with isotope by cooking time
 app.sortIsotope = function(sorting){
   console.log('sortIsotope');
   app.grid.isotope({
@@ -37,16 +38,17 @@ app.sortIsotope = function(sorting){
   });
 }
 
-// To append new items on page load and on search
+//  Append new items on page load and after new seraches
 app.appendListItems = function(listItems){
-  console.log('append');
 
+  //add thew new itesms
   app.grid.append(listItems);
 
+  // initialize isotope after new items were added
   app.grid.isotope({
     itemSelector: '.grid-item',
     masonry: {
-      columnWidth: 50
+      columnWidth: 80
     },
     getSortData: {
       number: '.number parseInt'
@@ -57,27 +59,27 @@ app.appendListItems = function(listItems){
 
 }
 
+// Search through input field
 app.newSearch = function(listItems){
   app.clearResults();
   app.grid.isotope('insert', $(listItems));
   app.grid.isotope();
 }
 
+
+//Remove all items from the results list
 app.clearResults = function(){
-  console.log('clear');
-  var elements = $('.food-list > li');
+  var elements = app.grid.find('li');
   app.grid.isotope('remove', elements);
 }
 
-
-/// Store the retun from yummly in a promise and pass it 
-// a course
-var course = app.getCourse(app.hour);
 
 // Save the yummly api call in a function
 // Make an ajax request to the yummly api and pass the course to it
 app.yummlyUrl = 'http://api.yummly.com/v1/api/recipes?_app_id=e02d3319&_app_key=379039ee0338958ed3ed2be6a5a82f0a'
 
+
+// Ajax request for recipes by course
 app.getRecipes = function(query) {
   return $.ajax({
     url: app.yummlyUrl,
@@ -90,14 +92,13 @@ app.getRecipes = function(query) {
   });    
 } 
 
+//Ajax request for recipes by ingredients
 app.searchRecipes = function(query){
   return $.ajax({
     url: app.yummlyUrl,
     dataType: 'jsonp',
     data: {
-    'allowedIngredient[]' : query,
-    'maxResult': 20,
-    'start' : 10
+      'allowedIngredient[]': query
     }
   });    
 }
@@ -112,11 +113,8 @@ app.getYumlyData = function(options , searchType){
     var promiseRecipe = app.searchRecipes(options);
   } 
 
-
   $.when(promiseRecipe).done(function(yummlyData){
     recipes = yummlyData.matches;
-
-    console.log(recipes);
 
     // Check if there are any matched reults or not
     if(recipes.length === 0 ){
@@ -139,23 +137,24 @@ app.getYumlyData = function(options , searchType){
 
       var ingredientCount = ingredients.length;
 
-      var item = `<li class="grid-item"><div><span class="wishlist fa fa-heart-o"></span><span class="tooltip">Add to Favourites</span><span class="item-img"style="background-image:url(${imageURL})"></span><p class="name">${recipeName}</p><p class="number fa fa-clock-o">${cookTime}</p><p>${whichCourse}</p><div class="modal"><h3 class="ingredient-link">Ingredients <i class="fa fa-plus"></i></h3><p class="title"><span class="counter">${ingredientCount}</span> ingredients</p><p class="ingredients">${ingredientList}</p><i class="fa fa-times"></i><a class="shop" href="#">Add to Shopping List</a></div></div></li>`;
+      var item = `<li class="grid-item"><div><span class="wishlist fa fa-heart-o"></span><span class="tooltip">Add to Favourites</span><span class="item-img"style="background-image:url(${imageURL})"></span><p class="name">${recipeName}</p><p class="number"><i class="fa fa-clock-o"></i>${cookTime}</p><p>${whichCourse}</p><div class="modal"><h3 class="ingredient-link">Ingredients <i class="fa fa-plus"></i></h3><p class="title"><span class="counter">${ingredientCount}</span> ingredients</p><p class="ingredients">${ingredientList}</p><i class="fa fa-times"></i><a class="shop" href="#">Add to Shopping List</a></div></div></li>`;
 
       recipeList = recipeList + item;
     }); // end foreach loop
-
-
+  
+    //append the new results to the page
     if($('.food-list li').length > 0){      
       app.newSearch(recipeList)
     }else{
       app.appendListItems(recipeList);
     }
-
     
   });/// end of .when()
 
 }// end app.getYumlyData()
 
+
+// Add recipe name to wishlsit
 app.addToWishlist = function(item){
   if((item).hasClass('fa-heart-o')){
       item.removeClass('fa-heart-o').addClass('fa-heart');
@@ -168,10 +167,13 @@ app.addToWishlist = function(item){
   $('.wishlist-container').append(selectedRecipe.clone()).addClass('active');
 }
 
+//Toggle Wishlist
 app.wishlistToggle = function(){
   $('.wishlist-container').toggleClass('active');
 }
 
+
+// Update quantity of items in the list
 app.updateCart = function(){
   // get number of items in shopping list
   var cartQty = $('.shopping-list li').length;
@@ -185,9 +187,19 @@ app.updateCart = function(){
   }
 }
 
+// Toggle List
 app.toggleCart = function(){
-  $('.shopping-container').toggleClass('active');
-  $('.fa-shopping-basket').toggleClass('active');
+  if($('.shopping-container').hasClass('active')){
+    $('.shopping-container').removeClass('active');
+    $('.fa-shopping-basket').removeClass('active');
+  }else{
+    $('.shopping-container').addClass('active');
+    $('.fa-shopping-basket').addClass('active');
+    setTimeout(function(){
+      $('.shopping-container').removeClass('active');
+      $('.fa-shopping-basket').removeClass('active');
+    }, 5000);
+  }  
 }
 
 // Toggle Ingredients Modal
@@ -201,7 +213,6 @@ app.toggleModal = function(link){
   }
 }
 
-
 //  Update Title of the Page
 app.updateTimeMsg = function(newCourse){
   $('.meal-time span').html(newCourse);
@@ -212,9 +223,7 @@ app.updateTimeMsg = function(newCourse){
 app.addToShopList = function(shopLink){
   
   var ingredientsClone = shopLink.siblings('.ingredients').html();
-
   listArray = ingredientsClone.split(",");
-
   listHTML = $.map( listArray, function(foodItem) {
     return ('<li>'+foodItem+'<span class="fa fa-close"></span></li>');
   });
@@ -241,9 +250,11 @@ app.init = function(){
 
   app.updateCart();
 
-  app.getYumlyData(course , 'standard');
+  app.getYumlyData(app.course , 'standard');
 
-  app.updateTimeMsg(course);
+  app.updateTimeMsg(app.course);
+
+  // Start Click events
 
   $('.meal-buttons button').on('click', function(e){
       e.preventDefault();
@@ -269,7 +280,7 @@ app.init = function(){
   // Toggle Shopping Cart
   $('#mini-cart').on('click', function(){
     app.toggleCart();
-  })
+  });
 
   // Sort recipies by time
   $('.time-button button').on('click', function(e){
@@ -279,9 +290,12 @@ app.init = function(){
     //Use isotope sort
     app.sortIsotope(sortBool);
 
-    $(this).toggleClass('active');
-    $(this).siblings('.button').toggleClass('active');
-  })
+    if(!$(this).hasClass('active')){
+      $(this).toggleClass('active');
+      $(this).siblings('.button').toggleClass('active');
+    }
+
+  });
 
   // Submit Search Query to Yummly
   $('#submit_search').on('click', function(e){

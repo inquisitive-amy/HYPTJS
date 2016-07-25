@@ -26,16 +26,16 @@
     </div>
 
     <div class="meal-buttons">
-      <button data-course="Breakfast and Brunch">Breakfast and Brunch</button>
-      <button data-course="Lunch">Lunch</button>
-      <button data-course="Snacks">Snacks</button>
-      <button data-course="Main Dishes">Main Dishes</button>
-      <button data-course="Desserts">Desserts</button>
+      <button class="button" data-course="Breakfast and Brunch">Breakfast and Brunch</button>
+      <button class="button" data-course="Lunch">Lunch</button>
+      <button class="button" data-course="Snacks">Snacks</button>
+      <button class="button" data-course="Main Dishes">Main Dishes</button>
+      <button class="button" data-course="Desserts">Desserts</button>
     </div>
 
     <div class="search">
       <label for="search">Or search for a recipe using ingredients you have</label>
-      <input type="text" id="search" placeholder="e.g. eggs, milk, apples">
+      <input type="text" id="search" placeholder="e.g. eggs">
       <button class="button" id="submit_search" type="submit">Search</button>
     </div>
 
@@ -44,8 +44,6 @@
       <button class="button active" data-time="true">shortest</button>
       <button class="button" data-time="false">longest</button>
     </div>
-
-    <button id="clear_list">CLEAR LIST</button>
     
     <div class="food-container">
       <ul class="food-list"></ul>

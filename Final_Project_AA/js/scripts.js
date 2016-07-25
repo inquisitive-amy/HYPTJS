@@ -80,38 +80,32 @@ app.yummlyUrl = 'http://api.yummly.com/v1/api/recipes?_app_id=e02d3319&_app_key=
 
 
 // Ajax request for recipes by course
-app.getRecipes = function(query) {
+app.getRecipes = function(query, searchType) {
+
+  // create a data object to pass different properties to
+  // depending on if its requesting courses, or ingredients
+  dataObj = {
+    'maxResult': 50,
+    'start' : 10
+  }
+
+  if(searchType === 'standard' ){
+    dataObj['allowedCourse[]'] = 'course^course-'+query;
+  }else if (searchType === 'searchQuery'){
+    dataObj['allowedIngredient[]'] = query;
+  } 
+
   return $.ajax({
     url: app.yummlyUrl,
     dataType: 'jsonp',
-    data: {
-    'allowedCourse[]' : 'course^course-'+query,
-    'maxResult': 50,
-    'start' : 10
-    }
+    data: dataObj
   });    
 } 
 
-//Ajax request for recipes by ingredients
-app.searchRecipes = function(query){
-  return $.ajax({
-    url: app.yummlyUrl,
-    dataType: 'jsonp',
-    data: {
-      'allowedIngredient[]': query
-    }
-  });    
-}
 
 // Get YummlyData
 app.getYumlyData = function(options , searchType){
-
-  // Determine which request to use
-  if(searchType === 'standard' ){
-    var promiseRecipe = app.getRecipes(options);
-  }else if (searchType === 'searchQuery'){
-    var promiseRecipe = app.searchRecipes(options);
-  } 
+  var promiseRecipe = app.getRecipes(options , searchType);
 
   $.when(promiseRecipe).done(function(yummlyData){
     recipes = yummlyData.matches;
